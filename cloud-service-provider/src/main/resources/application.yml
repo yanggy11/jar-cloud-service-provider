@@ -2,10 +2,10 @@ spring:
   application:
       name: cloud-service-provider
   datasource:
-    url: jdbc:mysql://localhost:3306/yanggy
+    url: jdbc:mysql://localhost:3306/derrick
     driver-class-name: com.mysql.jdbc.Driver
-    username: yanggy
-    password: ygy250725
+    username: root
+    password: root
     initialSize: 1
     minIdle: 1
     maxActive: 20
