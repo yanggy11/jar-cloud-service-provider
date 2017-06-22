@@ -2,7 +2,7 @@ spring:
   application:
       name: cloud-service-provider
   datasource:
-    url: jdbc:mysql://localhost:3306/derrick
+    url: jdbc:mysql://192.168.1.101:3306/derrick
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: root
@@ -20,4 +20,4 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:1988/eureka/
+      defaultZone: http://192.168.1.101:1988/eureka/
