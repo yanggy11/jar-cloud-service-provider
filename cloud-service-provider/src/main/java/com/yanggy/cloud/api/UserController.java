@@ -26,7 +26,11 @@ public class UserController {
 
         return userService.getUserById(id);
     }
+    @RequestMapping(value="/userList", method = RequestMethod.POST)
+    public Object getUsers() {
 
+        return userService.getUserList();
+    }
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Map<String,Object> userLogin(HttpServletRequest request, HttpServletResponse response, @RequestBody User user) {
         Map<String, Object> map = new HashMap<String,Object>();

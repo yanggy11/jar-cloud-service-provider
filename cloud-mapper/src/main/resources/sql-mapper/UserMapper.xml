@@ -23,4 +23,8 @@
     <select id="findByNameAndPassword" resultMap="userMap">
         select id,name,password,age,sex from users where name = #{username} and password = #{password}
     </select>
+
+    <select id="getUserList" resultMap="userMap">
+        select id, name,password,sex,age from users
+    </select>
 </mapper>
