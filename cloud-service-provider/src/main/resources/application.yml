@@ -2,7 +2,7 @@ spring:
   application:
       name: cloud-service-provider
   datasource:
-    url: jdbc:mysql://localhost:3306/yanggy
+    url: jdbc:mysql://47.92.32.170:3306/yanggy
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: root
