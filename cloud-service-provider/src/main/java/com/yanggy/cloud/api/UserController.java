@@ -23,12 +23,10 @@ public class UserController {
     private IUserService userService;
     @RequestMapping(value="/getUserById", method = RequestMethod.GET)
     public User getUserById(long id) {
-        System.out.println(1992);
         return userService.getUserById(id);
     }
     @RequestMapping(value="/userList", method = RequestMethod.POST)
     public Object getUsers() {
-        System.out.println(1992);
         return userService.getUserList();
     }
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -46,9 +44,8 @@ public class UserController {
     @RequestMapping(value="/register", method = RequestMethod.POST)
     public Map<String, Object> register(@RequestBody User user) {
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("port","1992");
         try {
-            int i = userService.register(user);
+            userService.register(user);
             map.put("message","success");
             map.put("code","200");
         }catch (Exception e) {
