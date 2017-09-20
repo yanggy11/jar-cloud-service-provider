@@ -23,23 +23,24 @@ public class UserController {
     private IUserService userService;
     @RequestMapping(value="/getUserById", method = RequestMethod.GET)
     public User getUserById(long id) {
-
+        System.out.println(1992);
         return userService.getUserById(id);
     }
     @RequestMapping(value="/userList", method = RequestMethod.POST)
     public Object getUsers() {
-
+        System.out.println(1992);
         return userService.getUserList();
     }
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Map<String,Object> userLogin(HttpServletRequest request, HttpServletResponse response, @RequestBody User user) {
+        System.out.println(1992);
         Map<String, Object> map = new HashMap<String,Object>();
         User userLogin = userService.login(user);
         map.put("id",userLogin == null ? "" : userLogin.getId());
         map.put("name",userLogin == null ? "" : userLogin.getName());
         map.put("age",userLogin == null ? "" : userLogin.getAge());
         map.put("sex",userLogin == null ? "" : userLogin.getSex() == 0 ? "男" : "女");
-        map.put("port","1992");
+        map.put("port","1993");
 
         return map;
     }
