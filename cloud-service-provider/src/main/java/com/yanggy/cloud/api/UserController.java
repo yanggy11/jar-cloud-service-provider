@@ -33,14 +33,12 @@ public class UserController {
     }
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Map<String,Object> userLogin(HttpServletRequest request, HttpServletResponse response, @RequestBody User user) {
-        System.out.println(1992);
         Map<String, Object> map = new HashMap<String,Object>();
         User userLogin = userService.login(user);
         map.put("id",userLogin == null ? "" : userLogin.getId());
         map.put("name",userLogin == null ? "" : userLogin.getName());
         map.put("age",userLogin == null ? "" : userLogin.getAge());
         map.put("sex",userLogin == null ? "" : userLogin.getSex() == 0 ? "男" : "女");
-        map.put("port","1993");
 
         return map;
     }
