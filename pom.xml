@@ -59,6 +59,10 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.23</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
         <!-- 这里使用阿里巴巴数据源 -->
         <dependency>
             <groupId>com.alibaba</groupId>

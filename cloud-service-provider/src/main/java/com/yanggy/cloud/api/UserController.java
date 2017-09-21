@@ -1,5 +1,7 @@
 package com.yanggy.cloud.api;
 
+import com.netflix.discovery.converters.Auto;
+import com.yanggy.cloud.config.DataSourceProperties;
 import com.yanggy.cloud.entity.User;
 import com.yanggy.cloud.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
+
+    @Autowired
+    private DataSourceProperties dataSourceProperties;
     @Autowired
     private IUserService userService;
     @RequestMapping(value="/getUserById", method = RequestMethod.GET)
@@ -31,6 +36,7 @@ public class UserController {
     }
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Map<String,Object> userLogin(HttpServletRequest request, HttpServletResponse response, @RequestBody User user) {
+        System.out.println(dataSourceProperties);
         Map<String, Object> map = new HashMap<String,Object>();
         User userLogin = userService.login(user);
         map.put("id",userLogin == null ? "" : userLogin.getId());
