@@ -1,25 +1,11 @@
 spring:
   application:
       name: cloud-service-provider
-#  datasource:
-#    url: jdbc:mysql://47.92.32.170:3306/yanggy
-#    driver-class-name: com.mysql.jdbc.Driver
-#    username: root
-#    password: root
-#    initialSize: 1
-#    minIdle: 1
-#    maxActive: 20
-#    maxWait: 60000
-#    timeBetweenEvictionRunsMillis: 60000
-#    minEvictableIdleTimeMillis: 300000
-#    type: com.alibaba.druid.pool.DruidDataSource
   cloud:
       config:
         uri: localhost:8888 # config server
         name: cloud-config # 要读取的配置文件application属性
         profile: ${config.profile:dev} # default config profile
-#mybatis:
-#  mapper-locations: classpath:sql-mapper/*.xml
 server:
   port: 1992
 eureka:
