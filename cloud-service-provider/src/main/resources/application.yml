@@ -1,17 +1,31 @@
 spring:
   application:
       name: cloud-service-provider
-  cloud:
-      config:
-        uri: localhost:8888 # config server
-        name: cloud-config # 要读取的配置文件application属性
-        profile: ${config.profile:dev} # default config profile
+  datasource:
+    url: jdbc:mysql://104.224.163.143:3306/yanggy
+    #    url: jdbc:mysql://localhost:8066/TESTDB
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+    initialSize: 1
+    minIdle: 1
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    type: com.alibaba.druid.pool.DruidDataSource
+
+#  cloud:
+#      config:
+#        uri: http://localhost:8888 # config server
+#        name: cloud-config # 要读取的配置文件application属性
+#        profile: ${config.profile:dev} # default config profile
 server:
   port: 1992
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:1988/eureka/
+      defaultZone: http://192.168.1.101:1988/eureka/
 
 security:
   basic:
@@ -19,3 +33,5 @@ security:
 management:
   security:
     enabled: false
+mybatis:
+  mapper-locations: sql-mapper/*.xml
