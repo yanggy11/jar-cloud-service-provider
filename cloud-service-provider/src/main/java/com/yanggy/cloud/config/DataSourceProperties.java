@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
  * Created by yangguiyun on 2017/9/21.
  */
 
-//@Component
-//@ConfigurationProperties(prefix = DataSourceProperties.PREFIX, ignoreUnknownFields = false)
+@Component
+@ConfigurationProperties(prefix = DataSourceProperties.PREFIX, ignoreUnknownFields = false)
 public class DataSourceProperties {
     public final static String PREFIX="jdbc";
 
