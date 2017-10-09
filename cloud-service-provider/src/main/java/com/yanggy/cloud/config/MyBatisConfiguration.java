@@ -20,10 +20,10 @@ import javax.sql.DataSource;
  * Created by yangguiyun on 2017/9/21.
  */
 
-@Configuration
-@MapperScan(MyBatisConfiguration.MAPPER_PACKAGE_PATH)
-@EnableConfigurationProperties(DataSourceProperties.class)
-@EnableTransactionManagement
+//@Configuration
+//@MapperScan(MyBatisConfiguration.MAPPER_PACKAGE_PATH)
+//@EnableConfigurationProperties(DataSourceProperties.class)
+//@EnableTransactionManagement
 public class MyBatisConfiguration {
     private final static String MAPPER_LOCATIONS = "sql-mapper/*.xml";
     private final static String ENTITY_PACKAGE_PATH = "com.yanggy.cloud.entity";
