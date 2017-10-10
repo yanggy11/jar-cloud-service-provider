@@ -3,7 +3,8 @@ spring:
       name: cloud-service-provider
   cloud:
     config:
-      uri: http://192.168.1.100:8887 # config server
+#      uri: http://192.168.1.100:8887 # config server
+      uri: http://192.168.25.128:8887 # config server
       name: cloud-config # 要读取的配置文件application属性
       profile: ${config.profile:dev} # default config profile
       username: yanggy11
@@ -14,7 +15,8 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://192.168.1.100:1988/eureka/
+#      defaultZone: http://192.168.1.100:8761/eureka/
+      defaultZone: http://192.168.25.128:8761/eureka/
 
 security:
   basic:
