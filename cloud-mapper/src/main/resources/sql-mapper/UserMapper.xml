@@ -26,5 +26,10 @@
 
     <select id="getUserList" resultMap="userMap">
         select id, name,password,sex,age from users
+        limit #{offset}, #{size}
+    </select>
+
+    <select id="countUsers" resultType="java.lang.Integer">
+        select count(id) from users
     </select>
 </mapper>

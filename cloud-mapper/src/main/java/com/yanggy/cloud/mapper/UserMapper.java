@@ -16,5 +16,6 @@ public interface UserMapper {
     User selectById(@Param("id") long id);
     User findByName(@Param("username") String name);
     User findByNameAndPassword(@Param("username") String username, @Param("password") String password);
-    List<User> getUserList();
+    List<User> getUserList(@Param("size") int size, @Param("offset") int offset);
+    int countUsers();
 }

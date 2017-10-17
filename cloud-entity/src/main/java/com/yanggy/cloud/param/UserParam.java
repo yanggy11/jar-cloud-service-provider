@@ -14,4 +14,6 @@ import java.io.Serializable;
 public class UserParam implements Serializable {
     private String name;
     private String password;
+    private int page;
+    private int pageSize = 15;
 }

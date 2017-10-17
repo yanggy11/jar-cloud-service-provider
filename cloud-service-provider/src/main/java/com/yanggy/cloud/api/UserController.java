@@ -1,7 +1,9 @@
 package com.yanggy.cloud.api;
 
+import com.yanggy.cloud.dto.Page;
 import com.yanggy.cloud.dto.ResponseEntity;
 import com.yanggy.cloud.entity.User;
+import com.yanggy.cloud.param.UserParam;
 import com.yanggy.cloud.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,8 +28,8 @@ public class UserController {
         return new ResponseEntity<>(userService.getUserById(id));
     }
     @RequestMapping(value="/userList", method = RequestMethod.POST)
-    public ResponseEntity<?> getUsers() {
-        return new ResponseEntity<>(userService.getUserList());
+    public Page<?> getUsers(@RequestBody UserParam userParam) {
+        return userService.getUserList(userParam);
     }
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<?> userLogin(HttpServletRequest request, HttpServletResponse response, @RequestBody User user) {
