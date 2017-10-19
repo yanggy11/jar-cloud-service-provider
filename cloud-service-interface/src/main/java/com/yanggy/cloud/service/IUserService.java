@@ -1,6 +1,7 @@
 package com.yanggy.cloud.service;
 
 import com.yanggy.cloud.dto.Page;
+import com.yanggy.cloud.dto.ResponseEntity;
 import com.yanggy.cloud.entity.User;
 import com.yanggy.cloud.param.UserParam;
 
@@ -15,4 +16,5 @@ public interface IUserService {
     int register(User user);
     int update(User user);
     Page<?> getUserList(UserParam userParam);
+    ResponseEntity<?> deleteUser(Long userId);
 }

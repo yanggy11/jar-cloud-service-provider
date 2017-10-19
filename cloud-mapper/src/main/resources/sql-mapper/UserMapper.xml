@@ -36,4 +36,8 @@
     <update id="update" parameterType="com.yanggy.cloud.entity.User">
         update users set name = #{name}, age = #{age}, sex = #{sex}, phone = #{phone}, email = #{email} where id = #{id}
     </update>
+
+    <delete id="deleteUser" parameterType="java.lang.Long">
+        delete from users where id = #{userId}
+    </delete>
 </mapper>

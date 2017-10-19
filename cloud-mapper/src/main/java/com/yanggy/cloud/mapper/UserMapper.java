@@ -1,5 +1,6 @@
 package com.yanggy.cloud.mapper;
 
+import com.yanggy.cloud.dto.ResponseEntity;
 import com.yanggy.cloud.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -20,4 +21,6 @@ public interface UserMapper {
     int countUsers();
 
     int update(User user);
+
+    int deleteUser(Long userId);
 }

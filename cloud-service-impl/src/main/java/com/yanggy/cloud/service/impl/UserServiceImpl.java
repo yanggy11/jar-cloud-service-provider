@@ -1,6 +1,7 @@
 package com.yanggy.cloud.service.impl;
 
 import com.yanggy.cloud.dto.Page;
+import com.yanggy.cloud.dto.ResponseEntity;
 import com.yanggy.cloud.entity.User;
 import com.yanggy.cloud.mapper.UserMapper;
 import com.yanggy.cloud.param.UserParam;
@@ -54,5 +55,10 @@ public class UserServiceImpl implements IUserService {
         page.setData(userMapper.getUserList(userParam.getPageSize(), (userParam.getPage() -1) * userParam.getPageSize()));
 
         return page;
+    }
+
+    @Override
+    public ResponseEntity<?> deleteUser(Long userId) {
+        return new ResponseEntity<>(userMapper.deleteUser(userId));
     }
 }

@@ -38,12 +38,15 @@ public class UserController {
 
     @RequestMapping(value="/updateUserInfo", method = RequestMethod.POST)
     public ResponseEntity<?> updateUserInfo(@RequestBody User user) {
-        userService.update(user);
-        return new ResponseEntity<>(null);
+        return new ResponseEntity<>(userService.update(user));
     }
     @RequestMapping(value="/register", method = RequestMethod.POST)
     public ResponseEntity<?> register(@RequestBody User user) {
-        userService.register(user);
-        return new ResponseEntity<>(null);
+        return new ResponseEntity<>(userService.register(user));
+    }
+
+    @RequestMapping(value="/delete", method = RequestMethod.POST)
+    public ResponseEntity<?> deleteUser(@RequestBody UserParam userParam) {
+        return userService.deleteUser(userParam.getUserId());
     }
 }
