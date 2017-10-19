@@ -18,4 +18,6 @@ public interface UserMapper {
     User findByNameAndPassword(@Param("username") String username, @Param("password") String password);
     List<User> getUserList(@Param("size") int size, @Param("offset") int offset);
     int countUsers();
+
+    int update(User user);
 }

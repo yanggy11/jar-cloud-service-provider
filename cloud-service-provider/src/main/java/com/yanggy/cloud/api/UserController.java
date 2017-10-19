@@ -23,9 +23,9 @@ public class UserController {
 
     @Autowired
     private IUserService userService;
-    @RequestMapping(value="/getUserById", method = RequestMethod.GET)
-    public ResponseEntity<?> getUserById(long id) {
-        return new ResponseEntity<>(userService.getUserById(id));
+    @RequestMapping(value="/getUserById", method = RequestMethod.POST)
+    public ResponseEntity<?> getUserById(@RequestBody UserParam userParam) {
+        return new ResponseEntity<>(userService.getUserById(userParam.getUserId()));
     }
     @RequestMapping(value="/userList", method = RequestMethod.POST)
     public Page<?> getUsers(@RequestBody UserParam userParam) {
@@ -36,6 +36,11 @@ public class UserController {
         return new ResponseEntity<>(userService.login(user));
     }
 
+    @RequestMapping(value="/updateUserInfo", method = RequestMethod.POST)
+    public ResponseEntity<?> updateUserInfo(@RequestBody User user) {
+        userService.update(user);
+        return new ResponseEntity<>(null);
+    }
     @RequestMapping(value="/register", method = RequestMethod.POST)
     public ResponseEntity<?> register(@RequestBody User user) {
         userService.register(user);

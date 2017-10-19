@@ -12,6 +12,7 @@ import java.io.Serializable;
 
 @Data
 public class UserParam implements Serializable {
+    private Long userId;
     private String name;
     private String password;
     private int page;

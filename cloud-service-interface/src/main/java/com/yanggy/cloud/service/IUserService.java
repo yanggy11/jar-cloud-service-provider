@@ -13,5 +13,6 @@ public interface IUserService {
     User login(User user);
     User getUserById(long id);
     int register(User user);
+    int update(User user);
     Page<?> getUserList(UserParam userParam);
 }

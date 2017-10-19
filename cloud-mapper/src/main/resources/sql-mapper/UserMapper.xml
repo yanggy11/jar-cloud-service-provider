@@ -10,11 +10,11 @@
     </resultMap>
 
     <select id="selectById" resultMap="userMap">
-        SELECT id,name,password,age,sex FROM users WHERE id = #{id}
+        SELECT id,name,age,sex,email,phone FROM users WHERE id = #{id}
     </select>
 
     <insert id="insertUser">
-        INSERT INTO users(name,password, age, sex) VALUES(#{name},#{password}, #{age}, #{sex})
+        INSERT INTO users(name,password, age, sex, email, phone) VALUES(#{name},#{password}, #{age}, #{sex}, #{email}, #{phone})
     </insert>
 
     <select id="findByName" parameterType="java.lang.String" resultMap="userMap">
@@ -25,11 +25,15 @@
     </select>
 
     <select id="getUserList" resultMap="userMap">
-        select id, name,password,sex,age from users
+        select id, name,email,phone,sex,age from users
         limit #{offset}, #{size}
     </select>
 
     <select id="countUsers" resultType="java.lang.Integer">
         select count(id) from users
     </select>
+
+    <update id="update" parameterType="com.yanggy.cloud.entity.User">
+        update users set name = #{name}, age = #{age}, sex = #{sex}, phone = #{phone}, email = #{email} where id = #{id}
+    </update>
 </mapper>

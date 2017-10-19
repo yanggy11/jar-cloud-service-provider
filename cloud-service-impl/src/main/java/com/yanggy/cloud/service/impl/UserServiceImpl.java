@@ -39,6 +39,11 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    public int update(User user) {
+        return userMapper.update(user);
+    }
+
+    @Override
     public Page<?> getUserList(UserParam userParam) {
         Page page = new Page();
         page.setPageSize(userParam.getPageSize());
