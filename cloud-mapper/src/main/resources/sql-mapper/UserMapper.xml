@@ -7,10 +7,13 @@
         <result column="password" property="password" jdbcType="VARCHAR"/>
         <result column="age" property="age" jdbcType="INTEGER"/>
         <result column="sex" property="sex" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER"/>
     </resultMap>
 
     <select id="selectById" resultMap="userMap">
-        SELECT id,name,age,sex,email,phone FROM users WHERE id = #{id}
+        SELECT id,name,age,sex,email,phone, create_time, update_time,delete_flag FROM users WHERE id = #{id}
     </select>
 
     <insert id="insertUser">
@@ -25,7 +28,7 @@
     </select>
 
     <select id="getUserList" resultMap="userMap">
-        select id, name,email,phone,sex,age from users
+        select id, name,email,phone,sex,age, create_time, update_time,delete_flag from users
         limit #{offset}, #{size}
     </select>
 
@@ -37,7 +40,7 @@
         update users set name = #{name}, age = #{age}, sex = #{sex}, phone = #{phone}, email = #{email} where id = #{id}
     </update>
 
-    <delete id="deleteUser" parameterType="java.lang.Long">
-        delete from users where id = #{userId}
-    </delete>
+    <update id="deleteUser" parameterType="java.lang.Long">
+        UPDATE users set delete_flag = 1 where id = #{userId}
+    </update>
 </mapper>
