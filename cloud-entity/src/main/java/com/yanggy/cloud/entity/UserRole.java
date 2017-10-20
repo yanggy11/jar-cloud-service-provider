@@ -9,8 +9,9 @@ import java.io.Serializable;
  */
 
 @Data
-public class UserRole implements Serializable {
-    private long id;
+public class UserRole extends BaseEntity {
+    private static final long serialVersionUID = 3080434653872164123L;
+
     private long userId;
     private long roleId;
 }

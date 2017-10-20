@@ -11,8 +11,9 @@ import java.io.Serializable;
  */
 
 @Data
-public class DynamicTree implements Serializable {
-    private Long id;
+public class DynamicTree extends BaseEntity {
+    private static final long serialVersionUID = 6310408155166158309L;
+
     private Long parentId;
     private String name;
     private String remark;

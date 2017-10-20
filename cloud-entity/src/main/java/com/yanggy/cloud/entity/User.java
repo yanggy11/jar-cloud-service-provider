@@ -11,13 +11,14 @@ import java.util.List;
  */
 
 @Data
-public class User implements Serializable {
-    private long id;
+public class User  extends BaseEntity{
+    private static final long serialVersionUID = 8898935594776534163L;
+
     private String name;
     private String password;
     private int sex;
     private int age;
     private String email;
-    private  String phone;
+    private String phone;
     private List<String> authorities = new ArrayList<>();
 }
