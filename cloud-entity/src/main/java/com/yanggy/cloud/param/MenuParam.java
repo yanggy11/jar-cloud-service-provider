@@ -6,16 +6,13 @@ import java.io.Serializable;
 
 /**
  * @Author: yangguiyun
- * @Date: 2017/10/17 12:57
+ * @Date: 2017/10/21 17:01
  * @Description:
  */
 
 @Data
-public class UserParam implements Serializable {
-    private Long userId;
-    private String name;
-    private String password;
-    private String confirmPassword;
+public class MenuParam implements Serializable {
+    private Long menuId;
     private int page;
     private int pageSize = 15;
 }

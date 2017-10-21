@@ -6,6 +6,7 @@ import com.yanggy.cloud.entity.User;
 import com.yanggy.cloud.mapper.UserMapper;
 import com.yanggy.cloud.param.UserParam;
 import com.yanggy.cloud.service.IUserService;
+import com.yanggy.cloud.utils.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,6 +37,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public int register(User user) {
+        user.setPassword(PasswordUtil.md5Encoder(user.getPassword(), null));
         return userMapper.insertUser(user);
     }
 
@@ -60,5 +62,16 @@ public class UserServiceImpl implements IUserService {
     @Override
     public ResponseEntity<?> deleteUser(Long userId) {
         return new ResponseEntity<>(userMapper.deleteUser(userId));
+    }
+
+    @Override
+    public ResponseEntity<?> editPassword(UserParam userParam) {
+        if(!userParam.getPassword().equals(userParam.getConfirmPassword())) {
+            return new ResponseEntity<>("密码不一致，请重新输入",null);
+        }
+
+        userParam.setPassword(PasswordUtil.md5Encoder(userParam.getPassword(),null));
+        userMapper.editPassword(userParam);
+        return new ResponseEntity<>(null);
     }
 }

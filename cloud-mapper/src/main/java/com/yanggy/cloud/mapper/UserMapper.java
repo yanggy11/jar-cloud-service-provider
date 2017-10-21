@@ -2,6 +2,7 @@ package com.yanggy.cloud.mapper;
 
 import com.yanggy.cloud.dto.ResponseEntity;
 import com.yanggy.cloud.entity.User;
+import com.yanggy.cloud.param.UserParam;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -16,11 +17,12 @@ public interface UserMapper {
     int insertUser(User user);
     User selectById(@Param("id") long id);
     User findByName(@Param("username") String name);
-    User findByNameAndPassword(@Param("username") String username, @Param("password") String password);
     List<User> getUserList(@Param("size") int size, @Param("offset") int offset);
     int countUsers();
 
     int update(User user);
 
     int deleteUser(Long userId);
+
+    int editPassword(UserParam userParam);
 }

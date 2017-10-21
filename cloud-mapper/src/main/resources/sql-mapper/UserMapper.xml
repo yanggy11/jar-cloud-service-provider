@@ -43,4 +43,8 @@
     <update id="deleteUser" parameterType="java.lang.Long">
         UPDATE users set delete_flag = 1 where id = #{userId}
     </update>
+
+    <update id="editPassword">
+        update users set password = #{password}, update_time = current_time() where id = #{userId}
+    </update>
 </mapper>

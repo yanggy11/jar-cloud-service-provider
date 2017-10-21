@@ -49,4 +49,8 @@ public class UserController {
     public ResponseEntity<?> deleteUser(@RequestBody UserParam userParam) {
         return userService.deleteUser(userParam.getUserId());
     }
+    @RequestMapping(value="/editPassword", method = RequestMethod.POST)
+    public ResponseEntity<?> editPassword(@RequestBody UserParam userParam) {
+        return userService.editPassword(userParam);
+    }
 }
