@@ -13,7 +13,7 @@ import java.util.List;
 @Mapper
 public interface MenuMapper {
 
-    List<Menu> getAllMenusInpage(@Param("size") Integer size, @Param("offset") Integer offset);
+    List<Menu> getAllMenus(@Param("parentId") Long parentId);
 
     int countMenus();
 }

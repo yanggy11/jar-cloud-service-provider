@@ -9,10 +9,11 @@
         <result column="icon" property="icon" jdbcType="TIMESTAMP"/>
     </resultMap>
 
-    <select id="getAllMenusInpage" resultMap="menuMap" >
-        select id, menu, menu_name, parent_id, icon,from menu
+    <select id="getAllMenus" resultMap="menuMap" parameterType="java.lang.Long">
+        select id, menu, menu_name, parent_id, icon from menu
+        where parent_id = #{parentId}
         order by id
-        limit #{offset}, #{size}
+
     </select>
 
     <select id="countMenus">
