@@ -1,5 +1,6 @@
 package com.yanggy.cloud.utils;
 
+
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 
 /**
