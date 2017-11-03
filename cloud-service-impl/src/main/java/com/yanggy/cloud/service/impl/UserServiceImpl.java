@@ -7,6 +7,8 @@ import com.yanggy.cloud.mapper.UserMapper;
 import com.yanggy.cloud.param.UserParam;
 import com.yanggy.cloud.service.IUserService;
 import com.yanggy.cloud.utils.PasswordUtil;
+import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Created by yangguiyun on 2017/6/15.
@@ -22,6 +25,8 @@ import java.util.Map;
 @Service("userService")
 @Transactional
 public class UserServiceImpl implements IUserService {
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
     @Autowired
     private UserMapper userMapper;
 
@@ -56,6 +61,9 @@ public class UserServiceImpl implements IUserService {
         page.setTotalPage(count % userParam.getPageSize() == 0 ? count / userParam.getPageSize() : count / userParam.getPageSize() + 1);
         page.setData(userMapper.getUserList(userParam.getPageSize(), (userParam.getPage() -1) * userParam.getPageSize()));
 
+        CompletableFuture.runAsync(() -> {
+            rabbitTemplate.convertAndSend("user_exchange","hello", page);
+        });
         return page;
     }
 

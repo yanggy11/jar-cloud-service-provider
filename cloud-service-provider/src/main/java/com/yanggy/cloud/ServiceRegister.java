@@ -1,6 +1,5 @@
 package com.yanggy.cloud;
 
-import de.codecentric.boot.admin.config.EnableAdminServer;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -13,7 +12,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableDiscoveryClient
 @SpringBootApplication
-@EnableAdminServer
 public class ServiceRegister {
     public static void main(String[] args) {
        new SpringApplicationBuilder(ServiceRegister.class).web(true).run(args);
