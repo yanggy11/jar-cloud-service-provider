@@ -26,4 +26,8 @@ public class MenuController {
     public ResponseEntity<?> getAllMenusInpage(@RequestBody MenuParam menuParam) {
         return menuService.getAllMenus(menuParam);
     }
+    @PostMapping(value = "getMenusList")
+    public ResponseEntity<?> getMenusList(@RequestBody MenuParam menuParam) {
+        return menuService.getMenusList(menuParam);
+    }
 }

@@ -27,7 +27,7 @@ import javax.sql.DataSource;
 public class MyBatisConfiguration {
     private final static String MAPPER_LOCATIONS = "sql-mapper/*.xml";
     private final static String ENTITY_PACKAGE_PATH = "com.yanggy.cloud.entity";
-    protected final static String MAPPER_PACKAGE_PATH = "com.yanggy.cloud.entity";
+    protected final static String MAPPER_PACKAGE_PATH = "com.yanggy.cloud.mapper";
     @Autowired
     private  DataSourceProperties dataSourceProperties;
     private DruidDataSource datasource = null;

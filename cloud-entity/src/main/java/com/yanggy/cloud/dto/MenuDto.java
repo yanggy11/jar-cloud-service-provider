@@ -19,5 +19,6 @@ public class MenuDto implements Serializable {
     private String menu;
     private String menuName;
     private String icon;
+    private String parentMenu;
     private List<Menu> childrens = new ArrayList<>();
 }

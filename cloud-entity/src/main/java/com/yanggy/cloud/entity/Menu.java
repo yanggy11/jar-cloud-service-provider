@@ -2,6 +2,8 @@ package com.yanggy.cloud.entity;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * @Author: yangguiyun
  * @Date: 2017/10/21 16:54
