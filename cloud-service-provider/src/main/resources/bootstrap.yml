@@ -6,7 +6,7 @@ spring:
 #      uri: http://192.168.1.100:8887 # config server
 #      uri: http://192.168.25.128:8887 # config server
       name: cloud-config # 要读取的配置文件application属性
-      profile: ${config.profile:dd} # default config profile
+      profile: ${config.profile:test} # default config profile
       username: yanggy11
       password: ygy591932230
       discovery:
@@ -17,6 +17,11 @@ spring:
     port: 5672
     username: guest
     password: derrick
+  zipkin:
+    base-url: http://localhost:9411
+  sleuth:
+    sampler:
+      percentage: 1.0
 server:
   port: 1991
 eureka:
@@ -34,7 +39,7 @@ management:
 #  context-path: /${spring.application.name}
   security:
     enabled: false
-mybatis:
-  mapper-locations: sql-mapper/*.xml
+#mybatis:
+#  mapper-locations: sql-mapper/*.xml
 
 #rabbitmq

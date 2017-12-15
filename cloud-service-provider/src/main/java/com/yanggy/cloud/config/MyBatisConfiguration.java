@@ -19,20 +19,20 @@ import javax.sql.DataSource;
 /**
  * Created by yangguiyun on 2017/9/21.
  */
-
-@Configuration
-@MapperScan(MyBatisConfiguration.MAPPER_PACKAGE_PATH)
-@EnableConfigurationProperties(DataSourceProperties.class)
-@EnableTransactionManagement
+//
+//@Configuration
+//@MapperScan(MyBatisConfiguration.MAPPER_PACKAGE_PATH)
+//@EnableConfigurationProperties(DataSourceProperties.class)
+//@EnableTransactionManagement
 public class MyBatisConfiguration {
     private final static String MAPPER_LOCATIONS = "sql-mapper/*.xml";
     private final static String ENTITY_PACKAGE_PATH = "com.yanggy.cloud.entity";
     protected final static String MAPPER_PACKAGE_PATH = "com.yanggy.cloud.mapper";
-    @Autowired
+//    @Autowired
     private  DataSourceProperties dataSourceProperties;
     private DruidDataSource datasource = null;
 
-    @Bean(destroyMethod = "close")
+//    @Bean(destroyMethod = "close")
     public DataSource dataSource(){
         datasource = new DruidDataSource();
         datasource.setUrl(dataSourceProperties.getUrl());
@@ -43,14 +43,14 @@ public class MyBatisConfiguration {
         return datasource;
     }
 
-    @PreDestroy
+//    @PreDestroy
     public void close() {
         if(datasource != null){
             datasource.close();
         }
     }
 
-    @Bean
+//    @Bean
     public SqlSessionFactory sqlSessionFactoryBean() throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource());
@@ -60,7 +60,7 @@ public class MyBatisConfiguration {
         return sqlSessionFactoryBean.getObject();
     }
 
-    @Bean
+//    @Bean
     public PlatformTransactionManager transactionManager() {
         return new DataSourceTransactionManager(dataSource());
     }
