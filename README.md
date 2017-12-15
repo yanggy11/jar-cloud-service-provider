@@ -36,16 +36,16 @@ eureka:
 
 从docker hub上下载最新的MySQL镜像，遵循如下步骤，即可利用docker构建MySQL主从环境。
 
-1.运行主库容器
+运行主库容器
 ```
 docker run --name mysql -p 33061:3306 -e MYSQL_ROOT_PASSWORD=root -v /Users/derrick.yang/mysql/data/:/var/lib/mysql/ -v /Users/derrick.yang/mysql/etc/:/etc/mysql/ 5fac85ee2c68
 ```
 
-2.运行从库容器
+运行从库容器
 ```
 docker run --name mysql -p 33062:3306 -e MYSQL_ROOT_PASSWORD=root -v /Users/derrick.yang/mysql/data/:/var/lib/mysql/ -v /Users/derrick.yang/mysql/etc/:/etc/mysql/ 5fac85ee2c68
 ```
-3.修改配置文件
+修改配置文件
 
 主库配置文件
 ```
