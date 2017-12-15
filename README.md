@@ -73,3 +73,31 @@ start slave;
 
 show slave status\G;
 ```
+
+#配置连接主从库
+
+1. 构造两个数据源，即主数据源和从数据源
+
+1) 定义主、从数据源属性，这里定义了两个数据源属性类，也可以合并成一个属性。
+```
+ * Created by derrick.yang on 12/15/17.
+ */
+
+@Data
+@Component
+@ConfigurationProperties(prefix = MasterDataSourceConfig.PREFIX, ignoreUnknownFields = false)
+public class MasterDataSourceConfig implements Serializable {
+    public static final String PREFIX = "master.jdbc";
+    private String type;
+    private String driver;
+    private String url;
+    private String username;
+    private String password;
+    private int initialSize;
+    private int minIdle;
+    private int maxActive;
+    private int maxWait;
+    private int timeBetweenEvictionRunsMillis;
+    private int minEvictableIdleTimeMillis;
+}
+```
