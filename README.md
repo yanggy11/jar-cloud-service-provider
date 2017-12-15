@@ -101,3 +101,34 @@ public class MasterDataSourceConfig implements Serializable {
     private int minEvictableIdleTimeMillis;
 }
 ```
+
+#增加链路信息
+引入maven依赖
+```
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-sleuth-zipkin-stream</artifactId>
+
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+        </dependency>
+```
+
+application.yml中增加rabbitmq和zipkin配置
+```
+        spring:
+          rabbitmq:
+            host: 192.168.1.100
+            port: 5672
+            username: guest
+            password: derrick
+          zipkin:
+            base-url: http://localhost:9411
+          sleuth:
+            sampler:
+              percentage: 1.0
+```
+
+重新启动项目
