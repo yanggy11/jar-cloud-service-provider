@@ -29,7 +29,13 @@ public class UserController {
     }
     @RequestMapping(value="/userList", method = RequestMethod.POST)
     public Page<?> getUsers(@RequestBody UserParam userParam) {
-        return userService.getUserList(userParam);
+        Page page = new Page();
+        try {
+            page = userService.getUserList(userParam);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return page;
     }
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<?> userLogin(HttpServletRequest request, HttpServletResponse response, @RequestBody User user) {
