@@ -29,11 +29,13 @@ public class MyBatisConfiguration {
     private final static String MAPPER_LOCATIONS = "sql-mapper/*.xml";
     private final static String ENTITY_PACKAGE_PATH = "com.yanggy.cloud.entity";
     protected final static String MAPPER_PACKAGE_PATH = "com.yanggy.cloud.mapper";
+
     @Autowired
     private  DataSourceProperties dataSourceProperties;
     private DruidDataSource datasource = null;
 
     @Bean(destroyMethod = "close")
+    @RefreshScope
     public DataSource dataSource(){
         datasource = new DruidDataSource();
         datasource.setUrl(dataSourceProperties.getUrl());
@@ -41,6 +43,7 @@ public class MyBatisConfiguration {
         datasource.setDriverClassName(dataSourceProperties.getDriver());
         datasource.setUsername(dataSourceProperties.getUsername());
         datasource.setPassword(dataSourceProperties.getPassword());
+        System.out.println(dataSourceProperties);
         return datasource;
     }
 

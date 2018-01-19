@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
  * Created by yangguiyun on 2017/9/21.
  */
 
+
+@RefreshScope
 @Component
 @RefreshScope
 @ConfigurationProperties(prefix = DataSourceProperties.PREFIX, ignoreUnknownFields = false)
