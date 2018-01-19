@@ -12,6 +12,8 @@ spring:
       discovery:
         enabled: true
         service-id: cloud-config
+    stream:
+      default-binder: rabbit
     bus:
       trace:
         enabled: true
@@ -31,6 +33,16 @@ spring:
       cluster-nodes: 39.107.97.132:9300
       repositories:
         enabled: true
+  kafka:
+    bootstrap-servers: 39.107.97.132:9092
+    consumer:
+      group-id: derrick
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-deserializer: org.apache.kafka.common.serialization.StringSerializer
+      value-deserializer: org.apache.kafka.common.serialization.StringSerializer
 server:
   port: 1991
 eureka:
