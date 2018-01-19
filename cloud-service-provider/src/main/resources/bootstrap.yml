@@ -25,6 +25,12 @@ spring:
   sleuth:
     sampler:
       percentage: 1.0
+  data:
+    elasticsearch:
+      cluster-name: yanggy
+      cluster-nodes: 39.107.97.132:9300
+      repositories:
+        enabled: true
 server:
   port: 1991
 eureka:

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
  */
 
 
-@RefreshScope
 @Component
 @RefreshScope
 @ConfigurationProperties(prefix = DataSourceProperties.PREFIX, ignoreUnknownFields = false)
