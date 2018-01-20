@@ -50,19 +50,10 @@ server:
 eureka:
   client:
     serviceUrl:
-
-#      defaultZone: http://192.168.1.100:8761/eureka/
       defaultZone: http://localhost:8000/eureka/
-
-
 security:
   basic:
     enabled: false
 management:
-#  context-path: /${spring.application.name}
   security:
     enabled: false
-#mybatis:
-#  mapper-locations: sql-mapper/*.xml
-
-#rabbitmq

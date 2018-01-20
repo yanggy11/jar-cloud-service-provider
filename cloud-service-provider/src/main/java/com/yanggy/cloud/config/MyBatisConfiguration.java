@@ -43,7 +43,6 @@ public class MyBatisConfiguration {
         datasource.setDriverClassName(dataSourceProperties.getDriver());
         datasource.setUsername(dataSourceProperties.getUsername());
         datasource.setPassword(dataSourceProperties.getPassword());
-        System.out.println(dataSourceProperties);
         return datasource;
     }
 

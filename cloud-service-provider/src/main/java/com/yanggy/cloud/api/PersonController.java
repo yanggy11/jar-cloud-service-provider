@@ -6,6 +6,7 @@ import com.yanggy.cloud.entity.mongo.MongoTest;
 import com.yanggy.cloud.service.PersonService;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +26,9 @@ public class PersonController {
     private KafkaTemplate<String, String> kafkaTemplate;
     @Autowired
     private PersonService personService;
+
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
     @PostMapping(value = "save")
     public ResponseEntity<?> save(@RequestBody Person person) {
         kafkaTemplate.send("test","test","111");
@@ -39,6 +43,7 @@ public class PersonController {
 
     @PostMapping(value = "saveMongoTest")
     public ResponseEntity<?> saveMongoTest(@RequestBody MongoTest mongoTest) {
+       redisTemplate.opsForSet().add("mongo", "monbgo");
         return personService.save(mongoTest);
     }
 }
