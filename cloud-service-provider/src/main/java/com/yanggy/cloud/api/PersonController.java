@@ -2,6 +2,7 @@ package com.yanggy.cloud.api;
 
 import com.yanggy.cloud.dto.ResponseEntity;
 import com.yanggy.cloud.entity.es.Person;
+import com.yanggy.cloud.entity.mongo.MongoTest;
 import com.yanggy.cloud.service.PersonService;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,4 +36,9 @@ public class PersonController {
         System.out.println(consumerRecord);
     }
 
+
+    @PostMapping(value = "saveMongoTest")
+    public ResponseEntity<?> saveMongoTest(@RequestBody MongoTest mongoTest) {
+        return personService.save(mongoTest);
+    }
 }
