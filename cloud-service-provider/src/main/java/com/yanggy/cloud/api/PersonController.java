@@ -32,7 +32,7 @@ public class PersonController {
     private PersonService personService;
 
     @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
+    private RedisTemplate<String, String> redisTemplate;
     @PostMapping(value = "save")
     public ResponseEntity<?> save(@RequestBody Person person) {
         kafkaTemplate.send(this.topic,"111");

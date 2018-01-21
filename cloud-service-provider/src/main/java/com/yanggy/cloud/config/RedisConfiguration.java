@@ -2,10 +2,13 @@ package com.yanggy.cloud.config;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import redis.clients.jedis.JedisPoolConfig;
 
 /**
@@ -59,9 +62,23 @@ public class RedisConfiguration {
 
     @Bean
     RedisTemplate redisTemplate() {
+        StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
         RedisTemplate redisTemplate = new RedisTemplate();
+
         redisTemplate.setConnectionFactory(jedisConnectionFactory());
 
+        redisTemplate.setKeySerializer(stringRedisSerializer);
+        redisTemplate.setHashKeySerializer(stringRedisSerializer);
+        redisTemplate.setValueSerializer(stringRedisSerializer);
+        redisTemplate.setHashValueSerializer(stringRedisSerializer);
+
         return redisTemplate;
+    }
+
+    @Bean
+    public CacheManager cacheManager() {
+        RedisCacheManager cacheManager = new RedisCacheManager(redisTemplate());
+
+        return cacheManager;
     }
 }
