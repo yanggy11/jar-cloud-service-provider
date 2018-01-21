@@ -34,16 +34,9 @@ spring:
         enabled: true
     mongodb:
       uri: mongodb://root:Ygy250725@dds-bp131b455b3c56e41445-pub.mongodb.rds.aliyuncs.com:3717,dds-bp131b455b3c56e42155-pub.mongodb.rds.aliyuncs.com:3717/admin?replicaSet=mgset-5066267 #mongodb://yanggy11:yanggy11@localhost:27017/yanggy #mongodb://root:Ygy250725@dds-bp131b455b3c56e41.mongodb.rds.aliyuncs.com:3717,dds-bp131b455b3c56e42.mongodb.rds.aliyuncs.com:3717/admin?replicaSet=mgset-5066267
-  kafka:
-    bootstrap-servers: 39.107.97.132:9092
-    consumer:
-      group-id: derrick
-      auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+kafka:
+  bootstrap-servers: localhost:9092
+  topic: test
 server:
   port: 1991
 eureka:
