@@ -35,6 +35,7 @@ public class PersonController {
     private RedisTemplate<String, String> redisTemplate;
     @PostMapping(value = "save")
     public ResponseEntity<?> save(@RequestBody Person person) {
+        String value = redisTemplate.boundValueOps("mongo").get();
         kafkaTemplate.send(this.topic,"111");
         return personService.save(person);
     }
@@ -47,7 +48,7 @@ public class PersonController {
 
     @PostMapping(value = "saveMongoTest")
     public ResponseEntity<?> saveMongoTest(@RequestBody MongoTest mongoTest) {
-       redisTemplate.opsForSet().add("mongo", "monbgo");
+       redisTemplate.opsForValue().set("mongo", "monbgo");
         return personService.save(mongoTest);
     }
 }
