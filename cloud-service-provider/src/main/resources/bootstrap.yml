@@ -8,9 +8,9 @@ spring:
       profile: ${config.profile:test} # default config profile
       username: yanggy11
       password: ygy591932230
-      discovery:
-        enabled: true
-        service-id: cloud-config
+#      discovery:
+#        enabled: true
+#        service-id: cloud-config
     stream:
       default-binder: rabbit
     bus:
