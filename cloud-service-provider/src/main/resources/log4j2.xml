@@ -30,7 +30,7 @@
         <!-- show sql-->
         <logger name="com.yanggy.cloud.mapper" level="DEBUG"/>
 
-        <Root level="info">
+        <Root level="debug">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="error"/>
             <AppenderRef ref="info_appender"/>

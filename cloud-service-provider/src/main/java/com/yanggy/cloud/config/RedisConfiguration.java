@@ -1,6 +1,7 @@
 package com.yanggy.cloud.config;
 
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
@@ -21,41 +22,25 @@ import redis.clients.jedis.JedisPoolConfig;
 @Data
 public class RedisConfiguration {
 
-    @Value("${redis.database}")
-    private String database;
-    @Value("${redis.host}")
-    private String host;
-    @Value("${redis.port}")
-    private String port;
-    @Value("${redis.password}")
-    private String password;
-    @Value("${redis.pool.max-active}")
-    private String maxActive;
-    @Value("${redis.pool.max-wait}")
-    private String maxWait;
-    @Value("${redis.pool.max-idle}")
-    private String maxIdle;
-    @Value("${redis.min-idle}")
-    private String minIdl;
-    @Value("${redis.timeout}")
-    private String timeout;
+    @Autowired
+    private RedisProperties redisProperties;
     @Bean
     JedisConnectionFactory jedisConnectionFactory() {
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
 
-        jedisPoolConfig.setMaxIdle(Integer.parseInt(this.maxIdle));
-        jedisPoolConfig.setMaxWaitMillis(Long.parseLong(this.maxWait));
-        jedisPoolConfig.setMinIdle(Integer.parseInt(this.minIdl));
-        jedisPoolConfig.setMaxTotal(Integer.parseInt(this.maxActive));
+        jedisPoolConfig.setMaxIdle(Integer.parseInt(redisProperties.getMaxIdle()));
+        jedisPoolConfig.setMaxWaitMillis(Long.parseLong(redisProperties.getMaxWait()));
+        jedisPoolConfig.setMinIdle(Integer.parseInt(redisProperties.getMinIdl()));
+        jedisPoolConfig.setMaxTotal(Integer.parseInt(redisProperties.getMaxActive()));
 
         JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory(jedisPoolConfig);
 
-        jedisConnectionFactory.setPassword(this.password);
-        jedisConnectionFactory.setPort(Integer.parseInt(this.port));
-        jedisConnectionFactory.setTimeout(Integer.parseInt(this.timeout));
+        jedisConnectionFactory.setPassword(redisProperties.getPassword());
+        jedisConnectionFactory.setPort(Integer.parseInt(redisProperties.getPort()));
+        jedisConnectionFactory.setTimeout(Integer.parseInt(redisProperties.getTimeout()));
         jedisConnectionFactory.setUsePool(true);
-        jedisConnectionFactory.setHostName(this.host);
-        jedisConnectionFactory.setDatabase(Integer.parseInt(this.database));
+        jedisConnectionFactory.setHostName(redisProperties.getHost());
+        jedisConnectionFactory.setDatabase(Integer.parseInt(redisProperties.getDatabase()));
 
         return jedisConnectionFactory;
     }
