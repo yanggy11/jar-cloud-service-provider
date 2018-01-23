@@ -5,7 +5,7 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -26,12 +26,13 @@ import java.util.Map;
 @EnableKafka
 public class KafkaConfiguration {
 
-    @Value("${kafka.bootstrap-servers}")
-    private String bootsTrapServers;
+    @Autowired
+    private KafkaProperties kafkaProperties;
+
 
     private Map<String, Object> producerConfigs() {
         Map<String, Object> props = new HashMap<>();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, this.bootsTrapServers);
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());
         props.put(ProducerConfig.RETRIES_CONFIG, 0);
         props.put(ProducerConfig.BATCH_SIZE_CONFIG, 4096);
         props.put(ProducerConfig.LINGER_MS_CONFIG, 1);
@@ -67,7 +68,7 @@ public class KafkaConfiguration {
 
     public Map<String, Object> consumerConfigs() {
         Map<String, Object> propsMap = new HashMap<>();
-        propsMap.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, this.bootsTrapServers);
+        propsMap.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());
         propsMap.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
         propsMap.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "100");
         propsMap.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "15000");

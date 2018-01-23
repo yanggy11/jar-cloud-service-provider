@@ -34,9 +34,6 @@ spring:
         enabled: true
     mongodb:
       uri: mongodb://root:Ygy250725@dds-bp131b455b3c56e41445-pub.mongodb.rds.aliyuncs.com:3717,dds-bp131b455b3c56e42155-pub.mongodb.rds.aliyuncs.com:3717/admin?replicaSet=mgset-5066267 #mongodb://yanggy11:yanggy11@localhost:27017/yanggy #mongodb://root:Ygy250725@dds-bp131b455b3c56e41.mongodb.rds.aliyuncs.com:3717,dds-bp131b455b3c56e42.mongodb.rds.aliyuncs.com:3717/admin?replicaSet=mgset-5066267
-kafka:
-  bootstrap-servers: localhost:9092
-  topic: test
 server:
   port: 1991
 eureka:
