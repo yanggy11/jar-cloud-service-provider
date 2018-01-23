@@ -17,4 +17,5 @@ public class KafkaProperties {
     public final static String KAFKA_PREFIX = "kafka";
 
     private String bootstrapServers;
+    private String topic;
 }
