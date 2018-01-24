@@ -41,7 +41,10 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://39.107.97.132:8000/eureka/
+      defaultZone: http://localhost:8000/eureka/
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    leaseExpirationDurationInSeconds: 30
 security:
   basic:
     enabled: false
