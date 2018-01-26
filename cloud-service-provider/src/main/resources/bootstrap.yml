@@ -4,8 +4,9 @@ spring:
   cloud:
     config:
       uri: http://39.107.97.132:8887 # config server
-      name: cloud-config # 要读取的配置文件application属性
-      profile: ${config.profile:test} # default config profile
+      name: ${spring.application.name} # 要读取的配置文件application属性
+      profile: dev # default config profile
+      label: master
       username: yanggy11
       password: ygy591932230
 #      discovery:
