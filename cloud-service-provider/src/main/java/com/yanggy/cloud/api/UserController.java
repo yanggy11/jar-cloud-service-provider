@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * Created by yangguiyun on 2017/6/14.
@@ -28,8 +29,8 @@ public class UserController {
         return new ResponseEntity<>(userService.getUserById(userParam.getUserId()));
     }
     @RequestMapping(value="/userList", method = RequestMethod.POST)
-    public Page<?> getUsers(@RequestBody UserParam userParam) {
-        Page page = new Page();
+    public Page<List<User>> getUsers(@RequestBody UserParam userParam) {
+        Page<List<User>> page = new Page();
         try {
             page = userService.getUserList(userParam);
         }catch (Exception e) {

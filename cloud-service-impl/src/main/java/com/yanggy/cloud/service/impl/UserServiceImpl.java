@@ -52,7 +52,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public Page<?> getUserList(UserParam userParam) {
+    public Page<List<User>> getUserList(UserParam userParam) {
         Page page = new Page();
         page.setPageSize(userParam.getPageSize());
         page.setPage(userParam.getPage());

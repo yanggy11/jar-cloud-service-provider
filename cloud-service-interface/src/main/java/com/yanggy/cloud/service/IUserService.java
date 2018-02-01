@@ -5,6 +5,7 @@ import com.yanggy.cloud.dto.ResponseEntity;
 import com.yanggy.cloud.entity.User;
 import com.yanggy.cloud.param.UserParam;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,7 +16,7 @@ public interface IUserService {
     User getUserById(long id);
     int register(User user);
     int update(User user);
-    Page<?> getUserList(UserParam userParam);
+    Page<List<User>> getUserList(UserParam userParam);
     ResponseEntity<?> deleteUser(Long userId);
     ResponseEntity<?> editPassword(UserParam userParam);
 }
