@@ -1,4 +1,4 @@
-package com.yanggy.cloud.config;
+package com.yanggy.cloud.common.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;

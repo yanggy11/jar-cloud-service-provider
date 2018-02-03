@@ -1,7 +1,7 @@
 package com.yanggy.cloud.api;
 
-import com.yanggy.cloud.config.DataSourceProperties;
-import com.yanggy.cloud.config.KafkaProperties;
+import com.yanggy.cloud.common.config.DataSourceProperties;
+import com.yanggy.cloud.common.config.KafkaProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

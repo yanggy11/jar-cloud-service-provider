@@ -1,4 +1,4 @@
-package com.yanggy.cloud.config;
+package com.yanggy.cloud.common.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
