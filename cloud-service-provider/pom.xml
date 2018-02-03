@@ -50,7 +50,7 @@
         </dependency>
         <dependency>
             <groupId>com.yanggy.cloud</groupId>
-            <artifactId>cloud-service-interface</artifactId>
+            <artifactId>cloud-service-impl</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>

@@ -6,7 +6,6 @@ import com.yanggy.cloud.entity.User;
 import com.yanggy.cloud.param.UserParam;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by yangguiyun on 2017/6/15.
