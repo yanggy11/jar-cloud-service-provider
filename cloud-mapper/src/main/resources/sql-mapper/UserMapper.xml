@@ -29,7 +29,15 @@
 
     <select id="getUserList" resultMap="userMap">
         select id, name,email,phone,sex,age, create_time, update_time,delete_flag from users
-        limit #{offset}, #{size}
+        <where>
+            <if test="name !=null and name != ''">
+                name = #{name}
+            </if>
+            <if test="sex != null and sex != ''">
+                sex = #{sex}
+            </if>
+        </where>
+        limit #{offset}, #{pageSize}
     </select>
 
     <select id="countUsers" resultType="java.lang.Integer" parameterType="com.yanggy.cloud.param.UserParam">
