@@ -56,14 +56,12 @@ public class UserServiceImpl implements IUserService {
         Page page = new Page();
         page.setPageSize(userParam.getPageSize());
         page.setPage(userParam.getPage());
-        int count = userMapper.countUsers();
+        int count = userMapper.countUsers(userParam);
         page.setTotalRecord(count);
         page.setTotalPage(count % userParam.getPageSize() == 0 ? count / userParam.getPageSize() : count / userParam.getPageSize() + 1);
-        page.setData(userMapper.getUserList(userParam.getPageSize(), (userParam.getPage() -1) * userParam.getPageSize()));
+        userParam.setOffset((userParam.getPage() -1) * userParam.getPageSize());
+        page.setData(userMapper.getUserList(userParam));
 
-        CompletableFuture.runAsync(() -> {
-            rabbitTemplate.convertAndSend("user_exchange","hello", page);
-        });
         return page;
     }
 
@@ -81,5 +79,10 @@ public class UserServiceImpl implements IUserService {
         userParam.setPassword(PasswordUtil.md5Encoder(userParam.getPassword(),null));
         userMapper.editPassword(userParam);
         return new ResponseEntity<>(null);
+    }
+
+    @Override
+    public ResponseEntity<?> deleteBatchUser(List<Long> userIds) {
+        return new ResponseEntity<>(userMapper.deleteBatchUser(userIds));
     }
 }

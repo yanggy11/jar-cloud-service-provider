@@ -6,10 +6,7 @@ import com.yanggy.cloud.entity.User;
 import com.yanggy.cloud.param.UserParam;
 import com.yanggy.cloud.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -55,6 +52,10 @@ public class UserController {
     @RequestMapping(value="/delete", method = RequestMethod.POST)
     public ResponseEntity<?> deleteUser(@RequestBody UserParam userParam) {
         return userService.deleteUser(userParam.getUserId());
+    }
+    @DeleteMapping(value="/deleteAll")
+    public ResponseEntity<?> deleteBatchUser(@RequestBody UserParam userParam) {
+        return userService.deleteBatchUser(userParam.getUserIds());
     }
     @RequestMapping(value="/editPassword", method = RequestMethod.POST)
     public ResponseEntity<?> editPassword(@RequestBody UserParam userParam) {

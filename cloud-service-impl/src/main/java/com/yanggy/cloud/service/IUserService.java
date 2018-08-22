@@ -18,4 +18,6 @@ public interface IUserService {
     Page<List<User>> getUserList(UserParam userParam);
     ResponseEntity<?> deleteUser(Long userId);
     ResponseEntity<?> editPassword(UserParam userParam);
+
+    ResponseEntity<?> deleteBatchUser(List<Long> userIds);
 }

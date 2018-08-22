@@ -3,6 +3,7 @@ package com.yanggy.cloud.param;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @Author: yangguiyun
@@ -16,6 +17,9 @@ public class UserParam implements Serializable {
     private String name;
     private String password;
     private String confirmPassword;
+    private String sex;
     private int page;
     private int pageSize = 15;
+    private List<Long> userIds;
+    private int offset;
 }

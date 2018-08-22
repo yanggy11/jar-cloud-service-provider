@@ -17,12 +17,14 @@ public interface UserMapper {
     int insertUser(User user);
     User selectById(@Param("id") long id);
     User findByName(@Param("username") String name);
-    List<User> getUserList(@Param("size") int size, @Param("offset") int offset);
-    int countUsers();
+    List<User> getUserList(UserParam userParam);
+    int countUsers(UserParam userParam);
 
     int update(User user);
 
     int deleteUser(Long userId);
 
     int editPassword(UserParam userParam);
+
+    int deleteBatchUser(List<Long> list);
 }

@@ -3,7 +3,7 @@ spring:
     name: cloud-service-provider
   cloud:
     config:
-      uri: http://39.107.97.132:8887 # config server
+      uri: http://192.168.1.51:8887 # config server
       name: ${spring.application.name} # 要读取的配置文件application属性
       profile: dev # default config profile
       label: master
@@ -20,23 +20,23 @@ spring:
       refresh:
         enabled: true
   rabbitmq:
-    host: 39.107.97.132
+    host: 192.168.1.51
     port: 5672
     username: admin
     password: admin
-  zipkin:
-    base-url: http://localhost:9411
-  sleuth:
-    sampler:
-      percentage: 1.0
-  data:
-    elasticsearch:
-      cluster-name: yanggy
-      cluster-nodes: 39.107.97.132:9300
-      repositories:
-        enabled: true
-    mongodb:
-      uri: mongodb://root:Ygy250725@dds-bp131b455b3c56e41445-pub.mongodb.rds.aliyuncs.com:3717,dds-bp131b455b3c56e42155-pub.mongodb.rds.aliyuncs.com:3717/admin?replicaSet=mgset-5066267 #mongodb://yanggy11:yanggy11@localhost:27017/yanggy #mongodb://root:Ygy250725@dds-bp131b455b3c56e41.mongodb.rds.aliyuncs.com:3717,dds-bp131b455b3c56e42.mongodb.rds.aliyuncs.com:3717/admin?replicaSet=mgset-5066267
+#  zipkin:
+#    base-url: http://localhost:9411
+#  sleuth:
+#    sampler:
+#      percentage: 1.0
+#  data:
+#    elasticsearch:
+#      cluster-name: yanggy
+#      cluster-nodes: 192.168.1.51:9300
+#      repositories:
+#        enabled: true
+#    mongodb:
+#      uri: mongodb://root:Ygy250725@dds-bp131b455b3c56e41445-pub.mongodb.rds.aliyuncs.com:3717,dds-bp131b455b3c56e42155-pub.mongodb.rds.aliyuncs.com:3717/admin?replicaSet=mgset-5066267 #mongodb://yanggy11:yanggy11@localhost:27017/yanggy #mongodb://root:Ygy250725@dds-bp131b455b3c56e41.mongodb.rds.aliyuncs.com:3717,dds-bp131b455b3c56e42.mongodb.rds.aliyuncs.com:3717/admin?replicaSet=mgset-5066267
 server:
   port: 1991
 eureka:

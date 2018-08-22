@@ -6,4 +6,5 @@ com/yanggy/cloud/common/config/RedisConfiguration.class
 com/yanggy/cloud/common/config/KafkaConfiguration.class
 com/yanggy/cloud/common/service/RedisServiceImpl.class
 com/yanggy/cloud/common/config/KafkaProperties.class
+com/yanggy/cloud/common/lock/RedisDistributeLock.class
 com/yanggy/cloud/common/config/MyBatisConfiguration.class
