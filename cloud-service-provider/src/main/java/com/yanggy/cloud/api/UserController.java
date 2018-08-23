@@ -1,10 +1,16 @@
 package com.yanggy.cloud.api;
 
+import com.alibaba.druid.support.json.JSONParser;
+import com.yanggy.cloud.common.config.RabbitConfiguration;
+import com.yanggy.cloud.common.service.RedisService;
+import com.yanggy.cloud.common.utils.Constants;
 import com.yanggy.cloud.dto.Page;
 import com.yanggy.cloud.dto.ResponseEntity;
 import com.yanggy.cloud.entity.User;
 import com.yanggy.cloud.param.UserParam;
 import com.yanggy.cloud.service.IUserService;
+import org.json.JSONObject;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +26,12 @@ import java.util.List;
 public class UserController {
 
     @Autowired
+    private AmqpTemplate amqpTemplate;
+
+    @Autowired
+    private RedisService redisService;
+
+    @Autowired
     private IUserService userService;
     @RequestMapping(value="/getUserById", method = RequestMethod.POST)
     public ResponseEntity<?> getUserById(@RequestBody UserParam userParam) {
@@ -30,9 +42,14 @@ public class UserController {
         Page<List<User>> page = new Page();
         try {
             page = userService.getUserList(userParam);
+
+            amqpTemplate.convertAndSend(Constants.RabbitConstants.USER_EXCHANGE, Constants.RabbitConstants.USER_QUEUE, page);
         }catch (Exception e) {
             e.printStackTrace();
         }
+
+
+        redisService.set("keykey:cloud", page.toString());
         return page;
     }
     @RequestMapping(value = "/login", method = RequestMethod.POST)

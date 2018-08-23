@@ -18,4 +18,15 @@ public class Page<T> implements Serializable {
     private int totalPage;
 
     T data;
+
+    @Override
+    public String toString() {
+        return "Page{" +
+                "page=" + page +
+                ", pageSize=" + pageSize +
+                ", totalRecord=" + totalRecord +
+                ", totalPage=" + totalPage +
+                ", data=" + data +
+                '}';
+    }
 }
