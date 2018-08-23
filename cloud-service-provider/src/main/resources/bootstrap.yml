@@ -19,11 +19,6 @@ spring:
         enabled: true
       refresh:
         enabled: true
-  rabbitmq:
-    host: 192.168.1.51
-    port: 5672
-    username: admin
-    password: admin
 #  zipkin:
 #    base-url: http://localhost:9411
 #  sleuth:

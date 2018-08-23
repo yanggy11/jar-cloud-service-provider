@@ -1,5 +1,6 @@
 /Users/derrick.yang/springcloud/jar-cloud-service-provider/cloud-common/src/main/java/com/yanggy/cloud/common/config/RabbitConfiguration.java
 /Users/derrick.yang/springcloud/jar-cloud-service-provider/cloud-common/src/main/java/com/yanggy/cloud/common/config/MyBatisConfiguration.java
+/Users/derrick.yang/springcloud/jar-cloud-service-provider/cloud-common/src/main/java/com/yanggy/cloud/common/config/RabbitMqProperties.java
 /Users/derrick.yang/springcloud/jar-cloud-service-provider/cloud-common/src/main/java/com/yanggy/cloud/common/config/DataSourceProperties.java
 /Users/derrick.yang/springcloud/jar-cloud-service-provider/cloud-common/src/main/java/com/yanggy/cloud/common/config/RedisConfiguration.java
 /Users/derrick.yang/springcloud/jar-cloud-service-provider/cloud-common/src/main/java/com/yanggy/cloud/common/service/RedisServiceImpl.java

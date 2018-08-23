@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
  */
 
 @Data
-@RefreshScope
 @ConfigurationProperties
+@RefreshScope
 @Component
 public class RedisProperties {
     @Value("${redis.database}")
