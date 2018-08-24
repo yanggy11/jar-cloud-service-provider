@@ -37,7 +37,6 @@ public class UserController {
             e.printStackTrace();
         }
 
-
         return page;
     }
     @RequestMapping(value = "/login", method = RequestMethod.POST)
