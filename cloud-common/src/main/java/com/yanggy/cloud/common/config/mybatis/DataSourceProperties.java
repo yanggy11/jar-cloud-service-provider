@@ -1,4 +1,4 @@
-package com.yanggy.cloud.common.config;
+package com.yanggy.cloud.common.config.mybatis;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;

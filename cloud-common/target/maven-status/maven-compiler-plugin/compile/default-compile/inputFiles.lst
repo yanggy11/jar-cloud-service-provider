@@ -8,4 +8,5 @@
 /Users/derrick.yang/springcloud/jar-cloud-service-provider/cloud-common/src/main/java/com/yanggy/cloud/common/service/RedisService.java
 /Users/derrick.yang/springcloud/jar-cloud-service-provider/cloud-common/src/main/java/com/yanggy/cloud/common/config/KafkaConfiguration.java
 /Users/derrick.yang/springcloud/jar-cloud-service-provider/cloud-common/src/main/java/com/yanggy/cloud/common/config/KafkaProperties.java
+/Users/derrick.yang/springcloud/jar-cloud-service-provider/cloud-common/src/main/java/com/yanggy/cloud/common/utils/Constants.java
 /Users/derrick.yang/springcloud/jar-cloud-service-provider/cloud-common/src/main/java/com/yanggy/cloud/common/lock/RedisDistributeLock.java

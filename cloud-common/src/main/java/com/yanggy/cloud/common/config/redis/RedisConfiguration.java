@@ -1,4 +1,4 @@
-package com.yanggy.cloud.common.config;
+package com.yanggy.cloud.common.config.redis;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;

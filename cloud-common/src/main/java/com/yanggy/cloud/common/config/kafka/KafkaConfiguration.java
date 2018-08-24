@@ -1,4 +1,4 @@
-package com.yanggy.cloud.common.config;
+package com.yanggy.cloud.common.config.kafka;
 
 import lombok.Data;
 import org.apache.kafka.clients.consumer.ConsumerConfig;

@@ -1,10 +1,8 @@
-package com.yanggy.cloud.common.config;
+package com.yanggy.cloud.common.config.kafka;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 
 /**
  * Created by derrick.yang on 1/23/18.
