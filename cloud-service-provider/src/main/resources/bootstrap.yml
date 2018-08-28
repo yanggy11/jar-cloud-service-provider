@@ -12,13 +12,22 @@ spring:
 #      discovery:
 #        enabled: true
 #        service-id: cloud-config
-    stream:
-      default-binder: rabbit
     bus:
       trace:
         enabled: true
       refresh:
         enabled: true
+redis:
+  database: 0
+  password: Ygy250725
+  pool:
+    max-idle: 8
+    min-idle: 0
+    max-active: 8
+    max-wait: -1
+  sentinel:
+    master: derrick
+    nodes: 192.168.1.51:26379,192.168.1.51:26380,192.168.1.51:26381
 #  zipkin:
 #    base-url: http://localhost:9411
 #  sleuth:

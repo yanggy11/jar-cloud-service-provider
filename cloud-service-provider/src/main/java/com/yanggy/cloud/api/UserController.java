@@ -1,5 +1,7 @@
 package com.yanggy.cloud.api;
 
+import com.yanggy.cloud.common.service.RedisService;
+import com.yanggy.cloud.common.utils.Constants;
 import com.yanggy.cloud.dto.Page;
 import com.yanggy.cloud.dto.ResponseEntity;
 import com.yanggy.cloud.entity.User;
@@ -7,6 +9,7 @@ import com.yanggy.cloud.entity.mongo.MongoTest;
 import com.yanggy.cloud.param.UserParam;
 import com.yanggy.cloud.repository.mongo.MongoTesstRepository;
 import com.yanggy.cloud.service.IUserService;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +26,9 @@ public class UserController {
 
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private AmqpTemplate amqpTemplate;
     @RequestMapping(value="/getUserById", method = RequestMethod.POST)
     public ResponseEntity<?> getUserById(@RequestBody UserParam userParam) {
         return new ResponseEntity<>(userService.getUserById(userParam.getUserId()));
@@ -32,6 +38,7 @@ public class UserController {
         Page<List<User>> page = new Page();
         try {
             page = userService.getUserList(userParam);
+            amqpTemplate.convertAndSend(Constants.RabbitConstants.USER_EXCHANGE, Constants.RabbitConstants.USER_QUEUE, page);
 
         }catch (Exception e) {
             e.printStackTrace();
@@ -69,11 +76,15 @@ public class UserController {
     @Autowired
     private MongoTesstRepository mongoTesstRepository;
 
+    @Autowired
+    private RedisService redisService;
+
     @PostMapping(value = "/mongo")
     public String mongoTest() {
         MongoTest mongoTest = new MongoTest();
 
         mongoTest.setName("derrick.test");
+        redisService.set("test_sentinal", "test_sentinal");
 
         mongoTesstRepository.save(mongoTest);
         return "1";

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisSentinelPool;
 
 /**
  * Created by derrick.yang on 2/10/18.
@@ -12,7 +13,7 @@ import redis.clients.jedis.JedisPool;
 @Service("redisService")
 public class RedisServiceImpl implements RedisService {
     @Autowired
-    private JedisPool jedisPool;
+    private JedisSentinelPool jedisPool;
 
     private Jedis getJedis() {
         return jedisPool.getResource();

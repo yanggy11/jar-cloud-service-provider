@@ -13,16 +13,12 @@ import org.springframework.stereotype.Component;
  */
 
 @Data
-//@ConfigurationProperties
-//@RefreshScope
-//@Component
-public class RedisProperties {
+@ConfigurationProperties
+@Component
+public class RedisSentinalProperties {
     @Value("${redis.database}")
     private String database;
-    @Value("${redis.host}")
-    private String host;
-    @Value("${redis.port}")
-    private String port;
+
     @Value("${redis.password}")
     private String password;
     @Value("${redis.pool.max-active}")
@@ -31,8 +27,12 @@ public class RedisProperties {
     private String maxWait;
     @Value("${redis.pool.max-idle}")
     private String maxIdle;
-    @Value("${redis.min-idle}")
+    @Value("${redis.pool.min-idle}")
     private String minIdl;
-    @Value("${redis.timeout}")
-    private String timeout;
+//    @Value("${timeout}")
+//    private String timeout;
+    @Value("${redis.sentinel.nodes}")
+    private String sentinelNodes;
+    @Value("${redis.sentinel.master}")
+    private String masterName;
 }
