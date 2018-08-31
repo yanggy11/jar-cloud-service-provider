@@ -85,8 +85,13 @@ public class UserController {
 
         mongoTest.setName("derrick.test");
         redisService.set("test_sentinal", "test_sentinal");
+        try {
+            mongoTesstRepository.save(mongoTest);
 
-        mongoTesstRepository.save(mongoTest);
+            System.out.println(mongoTesstRepository.findAll());
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
         return "1";
     }
 }

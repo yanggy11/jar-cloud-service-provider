@@ -26,7 +26,7 @@ public class MenuServiceImpl implements IMenuService {
     private MenuMapper menuMapper;
     @Override
     public ResponseEntity<?> getAllMenus(MenuParam menuParam) {
-        List<Menu> menus = menuMapper.getAllMenusByParent(-1l);
+        List<Menu> menus = menuMapper.getAllMenusByParent(0l);
         List<MenuDto> menuDtos = menus.stream().map(menu -> {
             MenuDto menuDto = new MenuDto();
             BeanUtils.copyProperties(menu, menuDto);
