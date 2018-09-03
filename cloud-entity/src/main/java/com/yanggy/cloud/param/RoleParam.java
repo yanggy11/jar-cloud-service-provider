@@ -3,6 +3,7 @@ package com.yanggy.cloud.param;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @Author: yangguiyun
@@ -16,4 +17,6 @@ public class RoleParam implements Serializable {
     private String roleName;
     private int page = 1;
     private int pageSize = 15;
+    private List<Long> roleIds;
+    private Long parentId;
 }

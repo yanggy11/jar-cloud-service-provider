@@ -3,6 +3,7 @@
 <mapper namespace="com.yanggy.cloud.mapper.RoleMapper">
     <resultMap id="roleMap" type="com.yanggy.cloud.entity.Role">
         <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="parent_id" property="parentId" jdbcType="BIGINT"/>
         <result column="role" property="role" jdbcType="VARCHAR"/>
         <result column="roleName" property="roleName" jdbcType="VARCHAR"/>
         <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER"/>
@@ -16,8 +17,13 @@
         limit #{offset}, #{size}
     </select>
 
-    <select id="countRoutes" resultType="java.lang.Integer">
+    <select id="countRoutes" resultType="java.lang.Integer" parameterType="java.lang.Long">
         select count(id) from role
+        <where>
+            <if test="null != parentId">
+                parent_id = #{parentId}
+            </if>
+        </where>
     </select>
 
     <insert id="addRole" parameterType="com.yanggy.cloud.entity.Role">
@@ -29,6 +35,17 @@
     <delete id="deleteRole" parameterType="java.lang.Long">
         DELETE from role where id = #{roleId}
     </delete>
+    <delete id="deleteRoles" parameterType="java.util.List">
+        <if test="list != null and list.size > 0">
+            DELETE from role
+            <where>
+              id in
+              <foreach collection="list" close=")" open="(" item="item">
+                #{item}
+              </foreach>
+            </where>
+        </if>
+    </delete>
 
     <delete id="deleteUserRole" parameterType="java.lang.Long">
         delete from user_role where role_id = #{roleId}
@@ -36,5 +53,9 @@
 
     <select id="getRoleById" parameterType="java.lang.Long" resultMap="roleMap">
         select id, role, roleName from role where id = #{roleId}
+    </select>
+
+    <select id="getAllRoles" resultMap="roleMap">
+        select id, role, roleName, parent_id from role
     </select>
 </mapper>

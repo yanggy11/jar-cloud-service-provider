@@ -44,4 +44,9 @@ public class RoleController {
     public ResponseEntity<?> getRoleById(@RequestBody RoleParam roleParam) {
         return roleService.getRoleById(roleParam);
     }
+
+    @PostMapping(value="getRoleTrees")
+    public ResponseEntity<?> getRoleTrees() {
+        return roleService.getRoleTrees();
+    }
 }

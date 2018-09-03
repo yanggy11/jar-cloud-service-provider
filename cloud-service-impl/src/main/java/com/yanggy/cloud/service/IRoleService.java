@@ -18,4 +18,6 @@ public interface IRoleService {
     ResponseEntity<?> editRole(Role role);
 
     ResponseEntity<?> getRoleById(RoleParam roleParam);
+
+    ResponseEntity<?> getRoleTrees();
 }
