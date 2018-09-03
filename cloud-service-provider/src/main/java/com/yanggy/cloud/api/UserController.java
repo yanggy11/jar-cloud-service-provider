@@ -1,9 +1,11 @@
 package com.yanggy.cloud.api;
 
+import com.yanggy.cloud.common.config.oss.AliOssUtils;
 import com.yanggy.cloud.common.service.RedisService;
 import com.yanggy.cloud.common.utils.Constants;
 import com.yanggy.cloud.dto.Page;
 import com.yanggy.cloud.dto.ResponseEntity;
+import com.yanggy.cloud.dto.UploadDto;
 import com.yanggy.cloud.entity.User;
 import com.yanggy.cloud.entity.mongo.MongoTest;
 import com.yanggy.cloud.param.UserParam;
@@ -12,10 +14,13 @@ import com.yanggy.cloud.service.IUserService;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by yangguiyun on 2017/6/14.
@@ -93,5 +98,17 @@ public class UserController {
             e.printStackTrace();
         }
         return "1";
+    }
+
+    @Autowired
+    private AliOssUtils aliOssUtils;
+    @RequestMapping(value="/uploa", method = RequestMethod.POST)
+    public Map uploadImage(UploadDto uploadDto, HttpServletRequest request) {
+
+        Map map = new HashMap();
+
+        map.put("imgUrl", aliOssUtils.uploadImage(uploadDto.getFile()));
+
+        return map;
     }
 }

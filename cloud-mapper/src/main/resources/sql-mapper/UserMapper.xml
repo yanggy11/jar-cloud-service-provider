@@ -10,25 +10,26 @@
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
         <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER"/>
+        <result column="avater" property="avater" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="selectById" resultMap="userMap">
-        SELECT id,name,age,sex,email,phone, create_time, update_time,delete_flag FROM users WHERE id = #{id}
+        SELECT id,name,age,sex,email,phone, avater, create_time, update_time,delete_flag FROM users WHERE id = #{id}
     </select>
 
     <insert id="insertUser">
-        INSERT INTO users(name,password, age, sex, email, phone) VALUES(#{name},#{password}, #{age}, #{sex}, #{email}, #{phone})
+        INSERT INTO users(name,password, age, sex, email, phone,avater) VALUES(#{name},#{password}, #{age}, #{sex}, #{email}, #{phone}, #{avater})
     </insert>
 
     <select id="findByName" parameterType="java.lang.String" resultMap="userMap">
-        select id,name,password,age,sex from users where name = #{username}
+        select id,name,password,age,sex,avater from users where name = #{username}
     </select>
     <select id="findByNameAndPassword" resultMap="userMap">
-        select id,name,password,age,sex from users where name = #{username} and password = #{password}
+        select id,name,password,age,sex,avater from users where name = #{username} and password = #{password}
     </select>
 
     <select id="getUserList" resultMap="userMap">
-        select id, name,email,phone,sex,age, create_time, update_time,delete_flag from users
+        select id, name,email,phone,sex,age, create_time,avater, update_time,delete_flag from users
         <where>
             <if test="name !=null and name != ''">
                 name = #{name}
@@ -53,7 +54,7 @@
     </select>
 
     <update id="update" parameterType="com.yanggy.cloud.entity.User">
-        update users set name = #{name}, age = #{age}, sex = #{sex}, phone = #{phone}, email = #{email} where id = #{id}
+        update users set name = #{name}, age = #{age}, sex = #{sex}, phone = #{phone}, email = #{email},avater = #{avater} where id = #{id}
     </update>
 
     <update id="deleteUser" parameterType="java.lang.Long">

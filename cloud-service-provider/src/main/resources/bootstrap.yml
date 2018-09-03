@@ -37,7 +37,7 @@ spring:
 #      repositories:
 #        enabled: true
     mongodb:
-      uri: mongodb://yanggy:ygy250725@192.168.1.52:27017,192.168.1.52:27018/derrick?readPreference=secondaryPreferred
+      uri: mongodb://yanggy:ygy250725@localhost:27017/derrick?readPreference=secondaryPreferred
 server:
   port: 1991
 eureka:

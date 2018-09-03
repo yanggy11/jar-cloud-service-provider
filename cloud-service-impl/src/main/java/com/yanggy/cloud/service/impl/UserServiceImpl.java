@@ -7,16 +7,12 @@ import com.yanggy.cloud.mapper.UserMapper;
 import com.yanggy.cloud.param.UserParam;
 import com.yanggy.cloud.service.IUserService;
 import com.yanggy.cloud.utils.PasswordUtil;
-import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.CompletableFuture;
 
 /**
  * Created by yangguiyun on 2017/6/15.

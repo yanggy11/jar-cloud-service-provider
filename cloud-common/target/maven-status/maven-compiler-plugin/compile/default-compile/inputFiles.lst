@@ -11,8 +11,10 @@
 /Users/derrick.yang/springcloud/jar-cloud-service-provider/cloud-common/src/main/java/com/yanggy/cloud/common/config/rabbit/RabbitMqProperties.java
 /Users/derrick.yang/springcloud/jar-cloud-service-provider/cloud-common/src/main/java/com/yanggy/cloud/common/config/rabbit/SendMq.java
 /Users/derrick.yang/springcloud/jar-cloud-service-provider/cloud-common/src/main/java/com/yanggy/cloud/common/utils/ResponseEntityDto.java
+/Users/derrick.yang/springcloud/jar-cloud-service-provider/cloud-common/src/main/java/com/yanggy/cloud/common/config/oss/AliOssUtils.java
 /Users/derrick.yang/springcloud/jar-cloud-service-provider/cloud-common/src/main/java/com/yanggy/cloud/common/service/RedisServiceImpl.java
 /Users/derrick.yang/springcloud/jar-cloud-service-provider/cloud-common/src/main/java/com/yanggy/cloud/common/config/mybatis/MyBatisConfiguration.java
 /Users/derrick.yang/springcloud/jar-cloud-service-provider/cloud-common/src/main/java/com/yanggy/cloud/common/enums/ErrorCode.java
+/Users/derrick.yang/springcloud/jar-cloud-service-provider/cloud-common/src/main/java/com/yanggy/cloud/common/config/oss/OssProperties.java
 /Users/derrick.yang/springcloud/jar-cloud-service-provider/cloud-common/src/main/java/com/yanggy/cloud/common/lock/RedisDistributeLock.java
 /Users/derrick.yang/springcloud/jar-cloud-service-provider/cloud-common/src/main/java/com/yanggy/cloud/common/config/redis/RedisProperties.java

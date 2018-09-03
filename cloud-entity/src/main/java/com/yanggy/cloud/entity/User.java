@@ -21,4 +21,5 @@ public class User  extends BaseEntity{
     private String email;
     private String phone;
     private List<String> authorities = new ArrayList<>();
+    private String avater;
 }
