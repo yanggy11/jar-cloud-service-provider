@@ -38,16 +38,16 @@ CREATE TABLE `menu` (
 --  Records of `menu`
 -- ----------------------------
 BEGIN;
-INSERT INTO `menu` VALUES ('1', 'readme', '自述', '-1', 'el-icon-setting'), ('2', '2', '数据管理', '-1', 'el-icon-menu'), ('6', 'userList', '用户管理', '2', ''), ('7', 'roles', '权限管理', '2', ''), ('8', 'menus', '菜单管理', '2', ''), ('9', 'routes', '路由管理', '2', '');
+INSERT INTO `menu` VALUES ('1', 'readme', '自述', '-1', 'el-icon-setting'), ('2', '2', '数据管理', '-1', 'el-icon-menu'), ('6', 'userList', '用户管理', '2', ''), ('7', 'resources', '权限管理', '2', ''), ('8', 'menus', '菜单管理', '2', ''), ('9', 'routes', '路由管理', '2', '');
 COMMIT;
 
 -- ----------------------------
---  Table structure for `role`
+--  Table structure for `resources`
 -- ----------------------------
-DROP TABLE IF EXISTS `role`;
-CREATE TABLE `role` (
+DROP TABLE IF EXISTS `resources`;
+CREATE TABLE `resources` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `role` varchar(100) NOT NULL DEFAULT '',
+  `resources` varchar(100) NOT NULL DEFAULT '',
   `roleName` varchar(100) NOT NULL DEFAULT '',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -56,10 +56,10 @@ CREATE TABLE `role` (
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Records of `role`
+--  Records of `resources`
 -- ----------------------------
 BEGIN;
-INSERT INTO `role` VALUES ('1', 'ROLE_USER', '普通用户', '2017-10-21 11:15:48', '2017-10-21 14:12:39', '0'), ('2', 'ROLE_ADMIN', '管理员', '2017-10-21 11:15:48', '2017-10-21 15:54:37', '0'), ('3', 'test', '测试', '2017-10-21 11:47:59', '2017-10-21 15:55:18', '0'), ('4', 'test1', '测试1', '2017-10-21 11:48:04', '2017-10-21 15:55:11', '0'), ('5', 'ROLE_CHECK', '检查员', '2017-10-21 14:02:50', '2017-10-21 14:02:50', '0'), ('6', 'ROLE_EDIT', '编辑权限', '2017-10-21 14:04:24', '2017-10-21 14:04:37', '0'), ('7', 'ROLE_USER_ADD', '用户新增权限', '2017-10-21 14:10:07', '2017-10-21 14:10:07', '0'), ('8', 'ROLE_USER_EDIT', '用户编辑权限', '2017-10-21 14:10:45', '2017-10-21 14:10:45', '0'), ('9', 'ROLE_USER_DELETE', '用户删除权限', '2017-10-21 14:11:36', '2017-10-21 14:11:36', '0'), ('10', 'ROLE_USER_QUERY', '用户查询权限', '2017-10-21 14:14:02', '2017-10-21 14:14:02', '0');
+INSERT INTO `resources` VALUES ('1', 'ROLE_USER', '普通用户', '2017-10-21 11:15:48', '2017-10-21 14:12:39', '0'), ('2', 'ROLE_ADMIN', '管理员', '2017-10-21 11:15:48', '2017-10-21 15:54:37', '0'), ('3', 'test', '测试', '2017-10-21 11:47:59', '2017-10-21 15:55:18', '0'), ('4', 'test1', '测试1', '2017-10-21 11:48:04', '2017-10-21 15:55:11', '0'), ('5', 'ROLE_CHECK', '检查员', '2017-10-21 14:02:50', '2017-10-21 14:02:50', '0'), ('6', 'ROLE_EDIT', '编辑权限', '2017-10-21 14:04:24', '2017-10-21 14:04:37', '0'), ('7', 'ROLE_USER_ADD', '用户新增权限', '2017-10-21 14:10:07', '2017-10-21 14:10:07', '0'), ('8', 'ROLE_USER_EDIT', '用户编辑权限', '2017-10-21 14:10:45', '2017-10-21 14:10:45', '0'), ('9', 'ROLE_USER_DELETE', '用户删除权限', '2017-10-21 14:11:36', '2017-10-21 14:11:36', '0'), ('10', 'ROLE_USER_QUERY', '用户查询权限', '2017-10-21 14:14:02', '2017-10-21 14:14:02', '0');
 COMMIT;
 
 -- ----------------------------

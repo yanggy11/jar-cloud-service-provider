@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Data
 public class  ResponseEntityDto<T> implements Serializable {
     private String status = "1"; //默认1 成功，0失败
-    private String msg = "success";
+    private String msg = "操作成功";
 
     private T data;
 

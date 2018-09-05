@@ -1,8 +1,11 @@
 package com.yanggy.cloud.api;
 
 import com.yanggy.cloud.common.config.oss.AliOssUtils;
+import com.yanggy.cloud.common.enums.ErrorCode;
 import com.yanggy.cloud.common.service.RedisService;
 import com.yanggy.cloud.common.utils.Constants;
+import com.yanggy.cloud.common.utils.ResponseEntityBuilder;
+import com.yanggy.cloud.common.utils.ResponseEntityDto;
 import com.yanggy.cloud.dto.Page;
 import com.yanggy.cloud.dto.ResponseEntity;
 import com.yanggy.cloud.dto.UploadDto;
@@ -10,6 +13,7 @@ import com.yanggy.cloud.entity.User;
 import com.yanggy.cloud.entity.mongo.MongoTest;
 import com.yanggy.cloud.param.UserParam;
 import com.yanggy.cloud.repository.mongo.MongoTesstRepository;
+import com.yanggy.cloud.service.IFileUploadService;
 import com.yanggy.cloud.service.IUserService;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,17 +30,27 @@ import java.util.Map;
  * Created by yangguiyun on 2017/6/14.
  */
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private IUserService userService;
 
     @Autowired
+    private IFileUploadService fileUploadService;
+
+    @Autowired
     private AmqpTemplate amqpTemplate;
     @RequestMapping(value="/getUserById", method = RequestMethod.POST)
-    public ResponseEntity<?> getUserById(@RequestBody UserParam userParam) {
-        return new ResponseEntity<>(userService.getUserById(userParam.getUserId()));
+    public ResponseEntityDto<?> getUserById(@RequestBody UserParam userParam) {
+        ResponseEntityDto<?> res = null;
+        try {
+            res = ResponseEntityBuilder.buildNormalResponseEntity(userService.getUserById(userParam.getUserId()));
+        }catch (Exception e) {
+            res = ResponseEntityBuilder.buildErrorResponseEntity(ErrorCode.UNKONWN_ERROR);
+        }
+
+        return res;
     }
     @RequestMapping(value="/userList", method = RequestMethod.POST)
     public Page<List<User>> getUsers(@RequestBody UserParam userParam) {
@@ -52,30 +66,85 @@ public class UserController {
         return page;
     }
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<?> userLogin(HttpServletRequest request, HttpServletResponse response, @RequestBody User user) {
-        return new ResponseEntity<>(userService.login(user));
+    public ResponseEntityDto<?> userLogin(HttpServletRequest request, HttpServletResponse response, @RequestBody User user) {
+        ResponseEntityDto<?> res = null;
+
+        try {
+            res = ResponseEntityBuilder.buildNormalResponseEntity(userService.login(user));
+        }catch (Exception e) {
+            res = ResponseEntityBuilder.buildErrorResponseEntity(ErrorCode.UNKONWN_ERROR);
+        }
+
+        return res;
     }
 
     @RequestMapping(value="/updateUserInfo", method = RequestMethod.POST)
-    public ResponseEntity<?> updateUserInfo(@RequestBody User user) {
-        return new ResponseEntity<>(userService.update(user));
+    public ResponseEntityDto<?> updateUserInfo(@RequestBody User user) {
+        ResponseEntityDto<?> res = null;
+
+        try {
+            userService.update(user);
+
+            res = ResponseEntityBuilder.buildNormalResponseEntity();
+        }catch (Exception e) {
+            res = ResponseEntityBuilder.buildErrorResponseEntity(ErrorCode.UNKONWN_ERROR);
+        }
+
+        return res;
     }
     @RequestMapping(value="/register", method = RequestMethod.POST)
-    public ResponseEntity<?> register(@RequestBody User user) {
-        return new ResponseEntity<>(userService.register(user));
+    public ResponseEntityDto<?> register(@RequestBody User user) {
+        ResponseEntityDto<?> res = null;
+
+        try {
+            res = ResponseEntityBuilder.buildNormalResponseEntity(userService.register(user));
+        }catch (Exception e) {
+            res= ResponseEntityBuilder.buildErrorResponseEntity(ErrorCode.UNKONWN_ERROR);
+        }
+
+        return res;
     }
 
     @RequestMapping(value="/delete", method = RequestMethod.POST)
-    public ResponseEntity<?> deleteUser(@RequestBody UserParam userParam) {
-        return userService.deleteUser(userParam.getUserId());
+    public ResponseEntityDto<?> deleteUser(@RequestBody UserParam userParam) {
+        ResponseEntityDto<?> res = null;
+
+        try {
+            userService.deleteUser(userParam.getUserId());
+
+            res = ResponseEntityBuilder.buildNormalResponseEntity();
+        }catch (Exception e) {
+            res = ResponseEntityBuilder.buildErrorResponseEntity(ErrorCode.UNKONWN_ERROR);
+        }
+
+        return res;
     }
     @DeleteMapping(value="/deleteAll")
-    public ResponseEntity<?> deleteBatchUser(@RequestBody UserParam userParam) {
-        return userService.deleteBatchUser(userParam.getUserIds());
+    public ResponseEntityDto<?> deleteBatchUser(@RequestBody UserParam userParam) {
+        ResponseEntityDto<?> res = null;
+
+        try {
+            userService.deleteBatchUser(userParam.getUserIds());
+
+            res = ResponseEntityBuilder.buildNormalResponseEntity();
+        }catch (Exception e) {
+            res = ResponseEntityBuilder.buildErrorResponseEntity(ErrorCode.UNKONWN_ERROR);
+        }
+
+        return res;
     }
     @RequestMapping(value="/editPassword", method = RequestMethod.POST)
-    public ResponseEntity<?> editPassword(@RequestBody UserParam userParam) {
-        return userService.editPassword(userParam);
+    public ResponseEntityDto<?> editPassword(@RequestBody UserParam userParam) {
+        ResponseEntityDto<?> res = null;
+
+        try {
+            userService.editPassword(userParam);
+            res = ResponseEntityBuilder.buildNormalResponseEntity();
+        }catch (Exception e) {
+            res = ResponseEntityBuilder.buildErrorResponseEntity(ErrorCode.UNKONWN_ERROR);
+        }
+
+        return res;
     }
 
     @Autowired
@@ -103,12 +172,16 @@ public class UserController {
     @Autowired
     private AliOssUtils aliOssUtils;
     @RequestMapping(value="/uploa", method = RequestMethod.POST)
-    public Map uploadImage(UploadDto uploadDto, HttpServletRequest request) {
+    public ResponseEntityDto<?> uploadImage(UploadDto uploadDto, HttpServletRequest request) {
 
-        Map map = new HashMap();
+        ResponseEntityDto<?> res = null;
 
-        map.put("imgUrl", aliOssUtils.uploadImage(uploadDto.getFile()));
+        try{
+            res = ResponseEntityBuilder.buildNormalResponseEntity(fileUploadService.fileUpload(uploadDto.getFile()));
+        }catch (Exception e) {
+            res = ResponseEntityBuilder.buildErrorResponseEntity(ErrorCode.UNKONWN_ERROR);
+        }
 
-        return map;
+        return res;
     }
 }

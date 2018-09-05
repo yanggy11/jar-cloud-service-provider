@@ -1,5 +1,6 @@
 package com.yanggy.cloud.dto;
 
+import com.yanggy.cloud.entity.Resources;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -7,15 +8,16 @@ import java.util.List;
 
 /**
  * @author derrick.yang
- * @Date 9/3/18 14:36
+ * @Date 9/5/18 14:24
  */
 
 @Data
 public class RoleDto implements Serializable {
     private Long id;
     private String role;
-    private String label;
+    private String roleName;
 
-    private List<RoleDto> children;
-    private Long parentId;
+    private String remark;
+
+    private List<Resources>resources;
 }

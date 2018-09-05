@@ -1,5 +1,6 @@
 package com.yanggy.cloud.mapper;
 
+import com.yanggy.cloud.dto.ResourcesDto;
 import com.yanggy.cloud.entity.Role;
 import com.yanggy.cloud.param.RoleParam;
 import org.apache.ibatis.annotations.Mapper;
@@ -8,24 +9,15 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * Created by yangguiyun on 2017/10/21.
+ * @author derrick.yang
+ * @Date 9/4/18 14:43
  */
 
 @Mapper
 public interface RoleMapper {
-    List<String> getAllRolesInpage(@Param("size") int size, @Param("offset") int offset);
+    int deleteRole(List<Long> list);
 
-    int countRoutes(RoleParam roleParam);
+    List<Role> getRolesByCriteria(RoleParam roleParam);
 
-    int deleteRole(@Param("roleId") Long roleId);
-    int deleteRoles( List<Long> list);
-
-    int addRole(Role role);
-
-    int editRole(Role role);
-
-    int deleteUserRole(@Param("roleId") Long roleId);
-
-    Role getRoleById(@Param("roleId") Long roleId);
-    List<Role> getAllRoles();
+    List<ResourcesDto> getResourcesByRole(@Param("roleId") Long roleId);
 }

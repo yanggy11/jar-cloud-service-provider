@@ -16,8 +16,8 @@ public interface IUserService {
     int register(User user);
     int update(User user);
     Page<List<User>> getUserList(UserParam userParam);
-    ResponseEntity<?> deleteUser(Long userId);
-    ResponseEntity<?> editPassword(UserParam userParam);
+    void deleteUser(Long userId);
+    void editPassword(UserParam userParam);
 
-    ResponseEntity<?> deleteBatchUser(List<Long> userIds);
+    void deleteBatchUser(List<Long> userIds);
 }

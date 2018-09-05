@@ -1,94 +1,88 @@
 package com.yanggy.cloud.service.impl;
 
-import com.yanggy.cloud.dto.Page;
-import com.yanggy.cloud.dto.ResponseEntity;
+import com.yanggy.cloud.common.enums.ErrorCode;
+import com.yanggy.cloud.common.utils.ResponseEntityBuilder;
+import com.yanggy.cloud.common.utils.ResponseEntityDto;
 import com.yanggy.cloud.dto.RoleDto;
+import com.yanggy.cloud.entity.Resources;
 import com.yanggy.cloud.entity.Role;
+import com.yanggy.cloud.mapper.ResourcesMapper;
 import com.yanggy.cloud.mapper.RoleMapper;
 import com.yanggy.cloud.param.RoleParam;
 import com.yanggy.cloud.service.IRoleService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @Author: yangguiyun
- * @Date: 2017/10/21 10:56
- * @Description:
+ * @author derrick.yang
+ * @Date 9/5/18 14:13
  */
 
-@Service("roleService")
+@Service
 public class RoleServiceImpl implements IRoleService {
+
+    private final static Logger logger = LoggerFactory.getLogger(RoleServiceImpl.class);
+
     @Autowired
     private RoleMapper roleMapper;
-    @Override
-    public Page<?> getAllRolesInPage(RoleParam roleParam) {
-        Page page = new Page();
-        page.setPageSize(roleParam.getPageSize());
-        page.setPage(roleParam.getPage());
-        int count = roleMapper.countRoutes(roleParam);
-        page.setTotalRecord(count);
-        page.setTotalPage(count % roleParam.getPageSize() == 0 ? count / roleParam.getPageSize() : count / roleParam.getPageSize() + 1);
-        page.setData(roleMapper.getAllRolesInpage(roleParam.getPageSize(), (roleParam.getPage() -1) * roleParam.getPageSize()));
+    @Autowired
+    private ResourcesMapper resourcesMapper;
 
-        return page;
+    @Override
+    public ResponseEntityDto<?> deleteRole(RoleParam roleParam) {
+        logger.info("删除角色方法开始");
+        ResponseEntityDto<?> res = null;
+
+        try {
+            roleMapper.deleteRole(roleParam.getRoleIds());
+
+            res = ResponseEntityBuilder.buildNormalResponseEntity();
+        } catch (Exception e) {
+            logger.info("删除角色发生未知异常", e);
+
+            res = ResponseEntityBuilder.buildErrorResponseEntity(ErrorCode.UNKONWN_ERROR);
+        }
+
+        logger.info("删除角色方法结束");
+
+        return res;
     }
 
     @Override
-    public ResponseEntity<?> deleteRole(RoleParam roleParam) {
-        //批量删除
-        roleMapper.deleteRoles(roleParam.getRoleIds());
-        return new ResponseEntity<>();
-    }
+    public ResponseEntityDto<?> getRoles(RoleParam roleParam) {
+        logger.info("查询角色方法开始");
+        ResponseEntityDto<?> res = null;
 
-    @Override
-    public ResponseEntity<?> addRole(Role role) {
-        return new ResponseEntity<>(roleMapper.addRole(role));
-    }
+        try {
+            List<Role> roles = roleMapper.getRolesByCriteria(roleParam);
 
-    @Override
-    public ResponseEntity<?> editRole(Role role) {
-        return new ResponseEntity<>(roleMapper.editRole(role));
-    }
+            List<RoleDto> roleDtos = roles.stream().parallel().map(role -> {
+                RoleDto roleDto = new RoleDto();
 
-    @Override
-    public ResponseEntity<?> getRoleById(RoleParam roleParam) {
-        return new ResponseEntity<>(roleMapper.getRoleById(roleParam.getRoleId()));
-    }
+                BeanUtils.copyProperties(role, roleDto);
 
-    @Override
-    public ResponseEntity<?> getRoleTrees() {
-        List<Role> roles = roleMapper.getAllRoles();
+                //查询该角色下的资源
+                List<Resources> resources = resourcesMapper.getResourcesByRole(role.getId());
+                roleDto.setResources(resources);
 
-        List<RoleDto> trees = roles.stream().filter(role -> 0 == role.getParentId()).map((role) -> {
-            RoleDto tree = new RoleDto();
-            BeanUtils.copyProperties(role, tree);
-            tree.setLabel(role.getRoleName());
+                return roleDto;
+            }).collect(Collectors.toList());
 
-            List<RoleDto>children = this.menuList(role.getId(), roles);
-            tree.setChildren(null == children ? null : children.size() <= 0 ? null : children);
+            res = ResponseEntityBuilder.buildNormalResponseEntity(roleDtos);
+        } catch (Exception e) {
+            logger.info("查询角色发生未知异常", e);
 
-            return tree;
-        }).collect(Collectors.toList());
+            res = ResponseEntityBuilder.buildErrorResponseEntity(ErrorCode.UNKONWN_ERROR);
+        }
 
-        return new ResponseEntity<>(trees);
-    }
+        logger.info("查询角色方法结束");
 
-    private List<RoleDto>menuList(Long id, List<Role> roles) {
-        List<RoleDto> children = new ArrayList<>();
-
-        children = roles.stream().filter(role -> id.equals(role.getParentId())).map(role -> {
-            RoleDto tree = new RoleDto();
-            BeanUtils.copyProperties(role, tree);
-            tree.setLabel(role.getRoleName());
-            tree.setChildren(menuList(role.getId(), roles));
-            return tree;
-        }).collect(Collectors.toList());
-
-        return children;
+        return res;
     }
 }

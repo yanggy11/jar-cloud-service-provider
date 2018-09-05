@@ -1,23 +1,14 @@
 package com.yanggy.cloud.service;
 
-import com.yanggy.cloud.dto.Page;
-import com.yanggy.cloud.dto.ResponseEntity;
-import com.yanggy.cloud.entity.Role;
+import com.yanggy.cloud.common.utils.ResponseEntityDto;
 import com.yanggy.cloud.param.RoleParam;
 
 /**
- * Created by yangguiyun on 2017/10/21.
+ * @author derrick.yang
+ * @Date 9/5/18 14:13
  */
 public interface IRoleService {
-    Page<?> getAllRolesInPage(RoleParam roleParam);
+    ResponseEntityDto<?> deleteRole(RoleParam roleParam);
 
-    ResponseEntity<?> deleteRole(RoleParam roleParam);
-
-    ResponseEntity<?> addRole(Role role);
-
-    ResponseEntity<?> editRole(Role role);
-
-    ResponseEntity<?> getRoleById(RoleParam roleParam);
-
-    ResponseEntity<?> getRoleTrees();
+    ResponseEntityDto<?> getRoles(RoleParam roleParam);
 }

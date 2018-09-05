@@ -62,23 +62,18 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public ResponseEntity<?> deleteUser(Long userId) {
-        return new ResponseEntity<>(userMapper.deleteUser(userId));
+    public void deleteUser(Long userId) {
+        userMapper.deleteUser(userId);
     }
 
     @Override
-    public ResponseEntity<?> editPassword(UserParam userParam) {
-        if(!userParam.getPassword().equals(userParam.getConfirmPassword())) {
-            return new ResponseEntity<>("密码不一致，请重新输入",null);
-        }
-
+    public void editPassword(UserParam userParam) {
         userParam.setPassword(PasswordUtil.md5Encoder(userParam.getPassword(),null));
         userMapper.editPassword(userParam);
-        return new ResponseEntity<>(null);
     }
 
     @Override
-    public ResponseEntity<?> deleteBatchUser(List<Long> userIds) {
-        return new ResponseEntity<>(userMapper.deleteBatchUser(userIds));
+    public void deleteBatchUser(List<Long> userIds) {
+        userMapper.deleteBatchUser(userIds);
     }
 }
