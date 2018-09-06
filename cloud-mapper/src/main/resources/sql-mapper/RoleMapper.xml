@@ -20,7 +20,7 @@
         <include refid="baseColumns"/>
         from role
         <where>
-
+            delete_flag = 0
             <if test="offset >= 0 and pageSize > 0">
                 limit #{offset}, #{pageSize}
             </if>
@@ -37,5 +37,18 @@
                 </foreach>
             </where>
         </if>
+    </update>
+
+    <insert id="addRole" parameterType="com.yanggy.cloud.entity.Role">
+        insert into role(role, roleName, remark) values(#{role}, #{roleName}, #{remark})
+    </insert>
+
+    <update id="editRole" parameterType="com.yanggy.cloud.entity.Role">
+        update role set role = #{role}, roleName = #{roleName}
+        <if test="remark != null and remark.trim() != ''">
+            ,remark = #{remark}
+        </if>
+
+        where id = #{id}
     </update>
 </mapper>

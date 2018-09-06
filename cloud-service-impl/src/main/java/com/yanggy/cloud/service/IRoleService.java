@@ -1,6 +1,7 @@
 package com.yanggy.cloud.service;
 
 import com.yanggy.cloud.common.utils.ResponseEntityDto;
+import com.yanggy.cloud.entity.Role;
 import com.yanggy.cloud.param.RoleParam;
 
 /**
@@ -11,4 +12,8 @@ public interface IRoleService {
     ResponseEntityDto<?> deleteRole(RoleParam roleParam);
 
     ResponseEntityDto<?> getRoles(RoleParam roleParam);
+
+    ResponseEntityDto<?> addRole(Role role);
+
+    ResponseEntityDto<?> editRole(Role role);
 }

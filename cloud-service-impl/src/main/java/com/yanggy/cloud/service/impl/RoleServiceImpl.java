@@ -85,4 +85,37 @@ public class RoleServiceImpl implements IRoleService {
 
         return res;
     }
+
+    @Override
+    public ResponseEntityDto<?> addRole(Role role) {
+        ResponseEntityDto<?> res = null;
+
+        try {
+            roleMapper.addRole(role);
+
+            res = ResponseEntityBuilder.buildNormalResponseEntity();
+        } catch (Exception e) {
+            logger.info("新增角色发生错误", e.getMessage());
+            res = ResponseEntityBuilder.buildErrorResponseEntity(ErrorCode.UNKONWN_ERROR);
+        }
+
+        return res;
+    }
+
+    @Override
+    public ResponseEntityDto<?> editRole(Role role) {
+        ResponseEntityDto<?> res = null;
+
+        try {
+            roleMapper.editRole(role);
+            res = ResponseEntityBuilder.buildNormalResponseEntity();
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            logger.info("编辑角色发生错误", e.getMessage());
+            res = ResponseEntityBuilder.buildErrorResponseEntity(ErrorCode.UNKONWN_ERROR);
+        }
+
+        return res;
+    }
 }

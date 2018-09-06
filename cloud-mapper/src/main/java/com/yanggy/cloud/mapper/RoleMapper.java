@@ -20,4 +20,8 @@ public interface RoleMapper {
     List<Role> getRolesByCriteria(RoleParam roleParam);
 
     List<ResourcesDto> getResourcesByRole(@Param("roleId") Long roleId);
+
+    int addRole(Role role);
+
+    int editRole(Role role);
 }
