@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author derrick.yang
@@ -21,7 +22,13 @@ public interface RoleMapper {
 
     List<ResourcesDto> getResourcesByRole(@Param("roleId") Long roleId);
 
-    int addRole(Role role);
+    int addRole(RoleParam role);
 
-    int editRole(Role role);
+    int editRole(RoleParam role);
+
+    int deleteResourcesByRoleId(@Param("id") Long id);
+
+    int insertRoleResources(RoleParam role);
+
+    List<Map> getAllRoles();
 }

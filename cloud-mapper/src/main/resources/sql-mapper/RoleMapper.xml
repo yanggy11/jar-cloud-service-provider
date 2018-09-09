@@ -39,7 +39,8 @@
         </if>
     </update>
 
-    <insert id="addRole" parameterType="com.yanggy.cloud.entity.Role">
+    <insert id="addRole" parameterType="com.yanggy.cloud.param.RoleParam" useGeneratedKeys="true" keyColumn="id"
+            keyProperty="id">
         insert into role(role, roleName, remark) values(#{role}, #{roleName}, #{remark})
     </insert>
 
@@ -51,4 +52,19 @@
 
         where id = #{id}
     </update>
+
+    <delete id="deleteResourcesByRoleId" parameterType="java.lang.Long">
+        delete from role_resources where role_id = #{id}
+    </delete>
+
+    <insert id="insertRoleResources" parameterType="com.yanggy.cloud.param.RoleParam">
+        insert into role_resources(role_id, resources_id) VALUES
+        <foreach collection="resourcesIds" item="item" separator="," >
+            (#{id}, #{item})
+        </foreach>
+    </insert>
+
+    <select id="getAllRoles" resultType="java.util.Map">
+        select id, role,roleName from role where delete_flag = 0
+    </select>
 </mapper>

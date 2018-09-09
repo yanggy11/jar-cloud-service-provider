@@ -17,4 +17,9 @@ public class RoleParam implements Serializable {
     private int pageSize = 20;
     private int offset = -1;
     private List<Long> roleIds;
+    private Long id;
+    private List<Long> resourcesIds;
+    private String role;
+    private String roleName;
+    private String remark;
 }

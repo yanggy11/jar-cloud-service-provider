@@ -20,4 +20,5 @@ public class RoleDto implements Serializable {
     private String remark;
 
     private List<Resources>resources;
+    private List<Long> resourcesId;
 }

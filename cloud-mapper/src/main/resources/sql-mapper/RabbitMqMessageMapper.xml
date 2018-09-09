@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yanggy.cloud.mapper.RabbitMqMessageMapper">
-    <resultMap id="userMap" type="com.yanggy.cloud.entity.RabbitMqMessage">
+    <resultMap id="rabbitMsgMap" type="com.yanggy.cloud.entity.RabbitMqMessage">
         <result column="id" property="messageId" jdbcType="VARCHAR"/>
         <result column="message" property="message" jdbcType="VARCHAR"/>
         <result column="exchange" property="exchange" jdbcType="VARCHAR"/>
@@ -9,7 +9,8 @@
         <result column="type" property="type" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
-        <result column="is_Processed" property="isProcessed" jdbcType="INTEGER"/>
+        <result column="is_processed" property="isProcessed" jdbcType="INTEGER"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER"/>
     </resultMap>
 
     <insert id="addMessage" parameterType="com.yanggy.cloud.entity.RabbitMqMessage">
@@ -18,4 +19,20 @@
         )
     </insert>
 
+    <select id="getMessages" parameterType="com.yanggy.cloud.param.RabbitMqMsgParam" resultMap="rabbitMsgMap">
+        select id, message, exchange,routing_key,type,create_time,update_time,is_Processed
+        from rabbit_mq_message
+        <where>
+            is_processed = #{isProcessed}
+            and type = #{type}
+
+            limit #{offset}, #{pageSize}
+        </where>
+    </select>
+
+    <update id="updateMsgStatus" parameterType="com.yanggy.cloud.param.RabbitMqMsgParam">
+        <if test="id != null">
+            update rabbit_mq_message set is_processed = 1 where id = #{id}
+        </if>
+    </update>
 </mapper>

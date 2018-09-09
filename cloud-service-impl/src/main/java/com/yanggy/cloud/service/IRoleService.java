@@ -13,7 +13,9 @@ public interface IRoleService {
 
     ResponseEntityDto<?> getRoles(RoleParam roleParam);
 
-    ResponseEntityDto<?> addRole(Role role);
+    ResponseEntityDto<?> addRole(RoleParam role);
 
-    ResponseEntityDto<?> editRole(Role role);
+    ResponseEntityDto<?> editRole(RoleParam role);
+
+    ResponseEntityDto<?> getAllRoles();
 }

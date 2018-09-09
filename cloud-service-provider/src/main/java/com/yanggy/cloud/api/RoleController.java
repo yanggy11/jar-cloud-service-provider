@@ -1,7 +1,6 @@
 package com.yanggy.cloud.api;
 
 import com.yanggy.cloud.common.utils.ResponseEntityDto;
-import com.yanggy.cloud.entity.Role;
 import com.yanggy.cloud.param.RoleParam;
 import com.yanggy.cloud.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,14 +31,19 @@ public class RoleController {
     }
 
     @PostMapping(value = "addRole")
-    public ResponseEntityDto<?> addRole(@RequestBody Role role) {
+    public ResponseEntityDto<?> addRole(@RequestBody RoleParam role) {
 
         return roleService.addRole(role);
     }
 
     @PostMapping(value = "editRole")
-    public ResponseEntityDto<?> editRole(@RequestBody Role role) {
+    public ResponseEntityDto<?> editRole(@RequestBody RoleParam role) {
 
         return roleService.editRole(role);
+    }
+    @PostMapping(value = "getAllRoles")
+    public ResponseEntityDto<?> getAllRoles() {
+
+        return roleService.getAllRoles();
     }
 }

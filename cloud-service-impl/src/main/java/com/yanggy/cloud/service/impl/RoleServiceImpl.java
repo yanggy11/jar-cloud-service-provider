@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -70,7 +71,9 @@ public class RoleServiceImpl implements IRoleService {
                 //查询该角色下的资源
                 List<Resources> resources = resourcesMapper.getResourcesByRole(role.getId());
                 roleDto.setResources(resources);
+                List<Long> resourcesId = resources.parallelStream().map(Resources::getId).collect(Collectors.toList());
 
+                roleDto.setResourcesId(resourcesId);
                 return roleDto;
             }).collect(Collectors.toList());
 
@@ -87,14 +90,18 @@ public class RoleServiceImpl implements IRoleService {
     }
 
     @Override
-    public ResponseEntityDto<?> addRole(Role role) {
+    public ResponseEntityDto<?> addRole(RoleParam role) {
         ResponseEntityDto<?> res = null;
 
         try {
             roleMapper.addRole(role);
 
+            roleMapper.insertRoleResources(role);
+
             res = ResponseEntityBuilder.buildNormalResponseEntity();
         } catch (Exception e) {
+
+            e.printStackTrace();
             logger.info("新增角色发生错误", e.getMessage());
             res = ResponseEntityBuilder.buildErrorResponseEntity(ErrorCode.UNKONWN_ERROR);
         }
@@ -103,11 +110,15 @@ public class RoleServiceImpl implements IRoleService {
     }
 
     @Override
-    public ResponseEntityDto<?> editRole(Role role) {
+    public ResponseEntityDto<?> editRole(RoleParam role) {
         ResponseEntityDto<?> res = null;
 
         try {
             roleMapper.editRole(role);
+
+            //更新角色的资源列表，先删除后添加
+            roleMapper.deleteResourcesByRoleId(role.getId());
+            roleMapper.insertRoleResources(role);
             res = ResponseEntityBuilder.buildNormalResponseEntity();
         } catch (Exception e) {
 
@@ -116,6 +127,19 @@ public class RoleServiceImpl implements IRoleService {
             res = ResponseEntityBuilder.buildErrorResponseEntity(ErrorCode.UNKONWN_ERROR);
         }
 
+        return res;
+    }
+
+    @Override
+    public ResponseEntityDto<?> getAllRoles() {
+        ResponseEntityDto<?> res = null;
+        try {
+            List<Map> roles = roleMapper.getAllRoles();
+
+            res = ResponseEntityBuilder.buildNormalResponseEntity(roles);
+        } catch (Exception e) {
+            res = ResponseEntityBuilder.buildErrorResponseEntity(ErrorCode.UNKONWN_ERROR);
+        }
         return res;
     }
 }
